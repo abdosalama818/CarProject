@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
         // localization route accept langauge
 
         'Localization' => \App\Http\Middleware\Localization::class,
+        'IsAdmin' => \App\Http\Middleware\IsAdmin::class,
 
         ///end
 

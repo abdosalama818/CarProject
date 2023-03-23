@@ -194,6 +194,13 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\CrudProvider::class, //cat Provider For Admin
+        App\Providers\BrandProvider::class, //Brand Provider For Admin
+        App\Providers\ModelCarProvider::class, //model Provider For Admin
+        App\Providers\CarProvider::class, //car Provider For Admin
+        App\Providers\BrancheProvider::class, //Branche Provider For Admin
+        App\Providers\AdminSettingProvider::class, //AdminSettingProvider Provider For Admin
+        App\Providers\AdminCrudProvider::class, //AdminSettingProvider Provider For Admin
 
 
 

@@ -25,6 +25,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'type',
     ];
 
     /**
@@ -60,6 +61,24 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }    
 
+
+
+
+    public function image()
+    {
+        return $this->morphOne(Image::class , 'imageable');
+    }
+
+//order belongs to one user
+    public function orders(){
+        return $this->hasMany(Order::class,'order_id');
+    }
+
+
+    // user has  one personalinfo
+    public function personalinfo(){
+        return $this->hasOne(Personalinformation::class,);
+    }
 
     
 }
