@@ -18,4 +18,7 @@ class Cat extends Model
     public function cars(){
         return $this->hasMany(Car::class);
     }
+
+
+    
 }

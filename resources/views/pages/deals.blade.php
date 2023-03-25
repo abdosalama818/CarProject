@@ -35,30 +35,37 @@
             <div class="col-lg-4">
                 <div class="car-list-left">
                     <div class="sidebar-widget">
-                        <form>
+                         <form action="{{ route('car.search') }}" method="get">
+                                    @csrf
                             <p>
-                                <input type="text" placeholder="Car Name"/>
+                                <input type="text" placeholder="Car Name" name='name'/>
                             </p>
                             <p>
-                                <select>
-                                    <option>Car Category</option>
-                                    <option data-display="Select">AC Car</option>
-                                    <option>Non-AC Car</option>
-                                </select>
+                                <select name='cat'>
+                                                    <option>Car Category</option>
+                                                   
+                                                    @foreach ($cats as $cat )
+                                                          <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                                    @endforeach
+                                                </select>
                             </p>
                             <p>
-                                <select>
-                                    <option>Car Model</option>
-                                    <option data-display="Select">AC Car</option>
-                                    <option>Non-AC Car</option>
-                                </select>
+                             <select name='model'>
+                                                    <option>Car Model</option>
+                                                    
+                                                   @foreach ($models as $model )
+                                                          <option value="{{$model->id}}">{{$model->name}}</option>
+                                                    @endforeach
+                                                </select>
                             </p>
                             <p>
-                                <select>
-                                    <option>Car Brand</option>
-                                    <option data-display="Select">AC Car</option>
-                                    <option>Non-AC Car</option>
-                                </select>
+                                  <select>
+                                                    <option name='brand'>Car Brand</option>
+                                                    
+                                                   @foreach ($brands as $brand )
+                                                          <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                    @endforeach
+                                                </select>
                             </p>
                             <p>
                                 <button type="submit" class="elgazal-theme-btn">Find Car</button>
@@ -71,58 +78,52 @@
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Brands<span>(2376)</span></a>
+                                <a href="#">All Brands<span>({{$brands->count()}})</span></a>
                             </li>
-                            <li>
-                                <a href="#">Toyota<span>(237)</span></a>
+
+                            @foreach ($brands as $brand )
+                                  <li>
+                                <a href="#">{{$brand->name}}<span>
+                          
+                                   ({{$brand->cars->count()}})
+                                   
+                              
+                                
+                                </span></a>
                             </li>
-                            <li>
-                                <a href="#">nissan<span>(123)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">mercedes<span>(23)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">hyundai<span>(467)</span></a>
-                            </li>
+                            @endforeach
+                          
+                      
                         </ul>
                     </div>
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Categories<span>(2376)</span></a>
+                                <a href="#">All Categories<span>({{$cats->count()}})</span></a>
                             </li>
-                            <li>
-                                <a href="#">Toyota<span>(237)</span></a>
+                            @foreach ($cats as $cat )
+                                  <li>
+                                <a href="#">{{$cat->name}}<span>
+                                 ({{$cat->cars->count()}})
+                                
+                                </span></a>
                             </li>
-                            <li>
-                                <a href="#">nissan<span>(123)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">mercedes<span>(23)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">hyundai<span>(467)</span></a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Models<span>(2376)</span></a>
+                                <a href="#">All Models<span>({{$models->count()}})</span></a>
                             </li>
-                            <li>
-                                <a href="#">Toyota<span>(237)</span></a>
+                                @foreach ($models as $model )
+                                  <li>
+                                <a href="#">{{$model->name}}<span>
+                               ({{$model->cars->count()}})
+                                
+                                </span></a>
                             </li>
-                            <li>
-                                <a href="#">nissan<span>(123)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">mercedes<span>(23)</span></a>
-                            </li>
-                            <li>
-                                <a href="#">hyundai<span>(467)</span></a>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -145,31 +146,34 @@
                     </div>
                     <div class="car-grid-list">
                         <div class="row">
-                            <div class="col-md-6">
+                        @foreach ($cars_p as $car_p ) {{-- foreach loop start --}}
+                              <div class="col-md-6">
                                 <div class="single-offers">
                                     <div class="offer-image">
                                         <a href="#">
-                                            <img src="assets/img/nissan-offer.png" alt="offer 1"/>
+                                            <img src='{{asset("uploads"."/".$car_p->car->img)}}' alt="offer 1"/>
                                         </a>
                                     </div>
                                     <div class="offer-text">
                                         <a href="#">
-                                            <h3>Nissan 370Z</h3>
+                                            <h3>  {{$car_p->name}} </h3>
                                         </a>
-                                        <h4><del>$75.00</del> $60.00<span>/ Day</span></h4>
+                                        <h4><del>${{$car_p->car->price}}</del> ${{$discount_price}}<span> Day / {{$discount_days}}</span></h4>
                                         <ul>
-                                            <li><i class="fa fa-car"></i>Model:2017</li>
+                                            <li><i class="fa fa-car"></i>Model:{{$car_p->car->modelcar->name}}</li>
                                             <li><i class="fa fa-cogs"></i>Automatic</li>
                                             <li><i class="fa fa-dashboard"></i>20kmpl</li>
                                         </ul>
                                         <div class="offer-action">
-                                            <a href="reserve.html" class="offer-btn-1">Rent Car</a>
-                                            <a href="car-details.html" class="offer-btn-2">Details</a>
+                                            <a href="{{route('car.reserve',$car_p->car->id)}}" class="offer-btn-1">Rent Car</a>
+                                            <a href="{{route('car.details',$car_p->car->id)}}" class="offer-btn-2">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                        @endforeach   {{-- foreach loop end --}}
+                          
+                         {{--    <div class="col-md-6">
                                 <div class="single-offers">
                                     <div class="offer-image">
                                         <a href="#">
@@ -192,9 +196,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
-                        <div class="row">
+                      {{--   <div class="row">
                             <div class="col-md-6">
                                 <div class="single-offers">
                                     <div class="offer-image">
@@ -293,19 +297,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                    <div class="pagination-box-row">
-                        <p>Page 1 of 6</p>
-                        <ul class="pagination">
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li>...</li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#"><i class="fa fa-angle-double-right"></i></a></li>
-                        </ul>
-                    </div>
+                  
+                       
+                       {{ $cars_p->links() }} 
+                    
                 </div>
             </div>
         </div>

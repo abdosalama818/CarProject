@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\SendEmailEvents;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CarController;
@@ -12,6 +13,10 @@ use App\Http\Controllers\Admin\ModelCarController;
 
 use App\Http\Controllers\Admin\AdminCrudController;
 use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\RequesrtedCarController;
+use App\Mail\OrderShipped;
+use Illuminate\Support\Facades\Mail;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -69,6 +74,21 @@ Route::group(
          ////// branches end
 
 
+           ////// Discounts start
+           Route::resource('Discounts',DiscountController::class)->middleware(['auth','IsAdmin']);
+           Route::get('discount_delete/{id}',[DiscountController::class,'delete'])->name('Discount.delete')->middleware(['auth','IsAdmin']);
+           ////// Discounts end
+
+
+           ///requested car
+
+           Route::get('request_car',[RequesrtedCarController::class,'index'])->name('request_car.index')->middleware(['auth','IsAdmin']);
+           Route::get('cardetails/{id}',[RequesrtedCarController::class,'carDetails'])->name('cardetails.show')->middleware(['auth','IsAdmin']);
+           Route::get('cancelrquest/{id}',[RequesrtedCarController::class,'cancelRequest'])->name('cancelrquest')->middleware(['auth','IsAdmin']);
+           Route::get('oldrquest',[RequesrtedCarController::class,'oldRequested'])->name('oldrquest')->middleware(['auth','IsAdmin']);
+        
+           ///end reqeusted car
+
          // admin crud controler 
          Route::resource('Admins',AdminCrudController::class)->middleware(['auth','IsAdmin']);
          Route::get('admin_delete/{id}',[AdminCrudController::class,'delete'])->name('Admin.delete')->middleware(['auth','IsAdmin']);
@@ -90,14 +110,22 @@ Route::group(
     /* ////////////////////////MAin site Route////////////////////////////////////////////////////  */
     /* ////////////////////////MAin site Route////////////////////////////////////////////////////  */
 
-      Route::get('/',[MianController::class,'index']);
-      Route::get('/deals',[MianController::class,'deals']);
+      Route::get('/',[MianController::class,'index'])->name('home');
+      Route::get('/deals',[MianController::class,'deals'])->name('deals');
+      Route::get('/fleats',[MianController::class,'fleats'])->name('fleats');
       Route::get('/car/search',[MianController::class,'findCar'])->name('car.search');
       Route::get('/resevecar/{id}',[MianController::class,'reserve'])->name('car.reserve');
-     // Route::get('/store/reserve/{id}',[MianController::class,'storeReserveCar'])->name('car.reserve_store');
-      
-      
+      Route::get('/car/details/{id}',[MianController::class,'car_datails'])->name('car.details');
 
+
+      Route::get('/about',[MianController::class,'about'])->name('about');
+      Route::get('/contact',[MianController::class,'contact'])->name('contact');
+
+
+    
+      //Route::get('/store/reserve/{id}',[MianController::class,'storeReserveCar'])->name('car.reserve_store');
+      
+    
 
      
     });

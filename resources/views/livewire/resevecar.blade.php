@@ -61,12 +61,17 @@
                         register
                     </a>
                     <div class="dropdown">
-                        <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
+
+                      {{--   <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
                                 data-toggle="dropdown" aria-haspopup="true"> English
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownlang">
-                            <li> Arabic</li>
-                        </ul>
+                        </button> --}}
+
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            {{ $properties['native'] }}
+                        </a>
+                @endforeach
                     </div>
                 </div>
             </div>

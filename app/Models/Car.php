@@ -28,7 +28,7 @@ class Car extends Model
 
 
     public function brand(){
-        return $this->belongsTo(Brand::class);
+        return $this->belongsTo(Brand::class,'brand_id');
     }
 
 
@@ -43,5 +43,11 @@ class Car extends Model
         return $this->belongsToMany(Order::class,'order_details');
     }
 
+    public function discount(){
+        return $this->belongsTo(discount::class,'car_id');
+    }
+
+
+   
  
 }

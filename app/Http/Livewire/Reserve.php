@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\Order;
-use App\Models\Personalinformation;
 use Livewire\Component;
+use App\Models\Personalinformation;
 use Illuminate\Support\Facades\Route;
 
 class Reserve extends Component
@@ -72,7 +73,7 @@ class Reserve extends Component
 
  
     public function firstSubmit(){
-         $validatedData = $this->validate([
+      /*    $validatedData = $this->validate([
             'ID_Number' => 'required',
             'Birthday' => 'required',
             'ID_Name' => 'required',
@@ -81,17 +82,33 @@ class Reserve extends Component
             'Home_Address' => 'required',
             'Work_Address' => 'required',
         ]);  
-
+ */
      
 
         $car = Car::where('id',intval($this->car))->first();
+
+
+     
+
+  
+      $expire_date = $this->Expiry_Date;
+      $current_date =now();
+      $time1=strtotime($expire_date);
+      $time2=strtotime($current_date);
+      $time=$time1 - $time2;
+     $days= date('d', $time);
+
        
+
+
       $order =  Order::create([
             'user_id'=>1,
             'name'=>$car->name,
             'price'=>$car->price,
             'start_date'=>now(),
-            'exp_date'=>1,
+            'exp_date'=>$this->Expiry_Date,
+            'total_price'=>$car->price * $days,
+            'number_days'=>$days,
         ]);
 
         $order->cars()->attach($car->id);

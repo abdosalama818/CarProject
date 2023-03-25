@@ -69,7 +69,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Africa/Cairo',
+    //'Africa/Cairo'
 
     /*
     |--------------------------------------------------------------------------
@@ -201,6 +202,7 @@ return [
         App\Providers\BrancheProvider::class, //Branche Provider For Admin
         App\Providers\AdminSettingProvider::class, //AdminSettingProvider Provider For Admin
         App\Providers\AdminCrudProvider::class, //AdminSettingProvider Provider For Admin
+        App\Providers\DiscountProvider::class, //DiscountProvider Provider For Admin
 
 
 

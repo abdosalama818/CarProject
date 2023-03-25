@@ -22,5 +22,13 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456789'),
             'type'=>'admin'
         ]);
+
+
+        DB::table('users')->insert([
+            'name' => 'abdo',
+            'email' => 'abdo@abdo.com',
+            'password' => Hash::make('123456789'),
+            'type'=>'client'
+        ]);
     }
 }

@@ -22,22 +22,59 @@
             </div>
             <div class="col-md-6">
                 <div class="header-top-right">
-                    <a href="login.html">
+                    <a href="{{route('login')}}">
                         <i class="fa fa-key"></i>
                         login
                     </a>
-                    <a href="register.html">
+                    <a href="{{route('register')}}">
                         <i class="fa fa-user"></i>
                         register
                     </a>
+
+
+
+
+
+                    {{-- 
+                    
+                       <div class="btn-group mb-1">
+            <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              @if (App::getLocale() == 'ar')
+              {{ LaravelLocalization::getCurrentLocaleName() }}
+             <img src="{{ URL::asset('assets/images/flags/EG.png') }}" alt="">
+              @else
+              {{ LaravelLocalization::getCurrentLocaleName() }}
+              <img src="{{ URL::asset('assets/images/flags/US.png') }}" alt="">
+              @endif
+              </button>
+            <div class="dropdown-menu">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            {{ $properties['native'] }}
+                        </a>
+                @endforeach
+            </div>
+        </div>
+                    
+                     --}}
+
+                  
+
                     <div class="dropdown">
-                        <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
+
+                      {{--   <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
                                 data-toggle="dropdown" aria-haspopup="true"> English
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownlang">
-                            <li> Arabic</li>
-                        </ul>
+                        </button> --}}
+
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            {{ $properties['native'] }}
+                        </a>
+                @endforeach
                     </div>
+
+
                 </div>
             </div>
         </div>
@@ -91,41 +128,9 @@
 
 
 <!-- Mainmenu Area Start -->
-<section class="elgazal-mainmenu-area">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="mainmenu">
-                    <nav>
-                        <ul id="elgazal_navigation">
-                            <li class="active"><a href="index.html">home</a></li>
-                            <li><a href="about.html">about</a></li>
-                            <li><a href="cars.html">Our Fleet</a></li>
-                            <li><a href="deals.html">Deals</a></li>
-                            <li><a href="contact.html">contact</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-12">
-                <div class="main-search-right">
-                    <!-- Responsive Menu Start -->
-                    <div class="elgazal-responsive-menu"></div>
-                    <!-- Responsive Menu Start -->
-                    <!-- Search Box Start -->
-                    <div class="search-box">
-                        <form>
-                            <input type="search" placeholder="Search">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </form>
-                    </div>
-                    <!-- Search Box End -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+@component('components.navbarcomponent')
+    
+@endcomponent
 <!-- Mainmenu Area End -->
 @yield('content')
 

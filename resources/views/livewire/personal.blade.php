@@ -39,7 +39,7 @@
                                 <div class="col-md-6">
                                     <p>
                                         <label>License Expiry Date</label>
-                                        <input type="date" wire:model="Expiry_Date"/>
+                                        <input type="datetime-local" wire:model="Expiry_Date"/>
                                     </p>
                                          @error('Expiry_Date')
                         <div class="alert alert-danger">{{ $message }}</div>

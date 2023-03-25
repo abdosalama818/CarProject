@@ -56,7 +56,9 @@
                             </div>
                         </div>
                         <div class="col-md-8">
+
                             <div class="find-form">
+                            
                                  <form action="{{ route('car.search') }}" method="get">
                                     @csrf
                                     <div class="row">
