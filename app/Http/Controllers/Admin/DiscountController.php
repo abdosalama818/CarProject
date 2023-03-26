@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Interface\DiscountInterface;
+use App\Models\Bigdiscount;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Cat;
@@ -30,18 +31,35 @@ class DiscountController extends Controller
 
     public function index()
     {  
+
+
         
         $discounts = $this->getAllData(new Discount());
-        $discountcats = $this->getAllData(new Discountcat());
-        $discountbrands = $this->getAllData(new Discountbrand());
-        $discountmodels = $this->getAllData(new Discountmodel());
-        $cars = $this->getAllData(new Car());
+      
+       
+
+
         $cats = $this->getAllData(new Cat());
+        $cars = $this->getAllData(new Car());
         $models = $this->getAllData(new ModelCar());
         $brands = $this->getAllData(new Brand());
 
-      
-        return view('admin.offers')->with(compact('discounts','cars','cats','models','brands','discountcats','discountbrands','discountmodels'));
+        $big_discount = Bigdiscount::all();
+       
+        foreach($big_discount as $dis){
+            $cars = Car::where('cat_id','<>',$dis->cat_id)->orWhere('model_car_id','<>',$dis->model_car_id)
+            ->orWhere('brand_id','<>',$dis->brand_id)->get();
+            if($cars){
+                return view('admin.offers')->with(compact('discounts','cars','cats','models','brands','big_discount'));
+
+            }
+        
+       
+        }
+        
+        return view('admin.offers')->with(compact('discounts','cars','cats','models','brands','big_discount'));
+       
+     
     }
 
     
@@ -56,6 +74,7 @@ class DiscountController extends Controller
       
    
         try{
+           
            // $validated = $request->validated();
 
         $this->discountInterface->store($request);

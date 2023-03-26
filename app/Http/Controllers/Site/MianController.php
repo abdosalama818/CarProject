@@ -30,8 +30,10 @@ class MianController extends Controller
 
         $cats = $this->getAllData(new Cat());
         $models = $this->getAllData(new ModelCar());
-        $brands = $this->getAllData(new Brand());
+      //  $brands = $this->getAllData(new Brand());
         $cars = $this->getAllData(new Car());
+       $brands = Brand::with('discount')->get();
+      $brands = Brand::all();
        return view('pages.index')->with(compact('cats','models','brands','cars'));
     }
 
@@ -58,34 +60,7 @@ class MianController extends Controller
        return view('livewire.resevecar')/* ->with(compact('car') ) */;
     }
 
-    public function store(Request $request)
-    {
-        //
-    }
 
-    
-    public function show($id)
-    {
-        //
-    }
-
-    
-    public function edit($id)
-    {
-        //
-    }
-
-   
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-   
-    public function destroy($id)
-    {
-        //
-    }
 
 
 
@@ -96,20 +71,28 @@ class MianController extends Controller
 
     public function deals()
     {
-        $cats = $this->getAllData(new Cat());
+      /*   $cats = $this->getAllData(new Cat());
         $models = $this->getAllData(new ModelCar());
         $cars = $this->getAllData(new Car());
-        $brands = $this->getAllData(new Brand());
+        $brands = $this->getAllData(new Brand()); */
+       // $cars = $this->getAllData(new Car());
+       $cars = $this->getAllData(new Car());
         $cars_p = Discount::with('car')->orderBy('id')->paginate(6);
-      
+    $cats = Cat::with('discount')->get();
+    $models = ModelCar::with('discount')->get();
+    $brands = Brand::with('discount')->get();
 
               foreach($cars_p as $car_p){
 
                
 
                     if($car_p->discount_type == 'precent'){
+
                     
                         $discount_price = $car_p->car->price - ($car_p->discount_value / 100)*$car_p->car->price ;
+                    }elseif($car_p->discount_type == 'flat'){
+                     
+                        $discount_price = $car_p->car->price - $car_p->discount_value  ;
                     }
             //to count discount day start 
                $discount_end=strtotime($car_p->discount_end);

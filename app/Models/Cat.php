@@ -18,7 +18,9 @@ class Cat extends Model
     public function cars(){
         return $this->hasMany(Car::class);
     }
-
+    public function discount(){
+        return $this->hasOne(Bigdiscount::class,'cat_id');
+    }
 
     
 }

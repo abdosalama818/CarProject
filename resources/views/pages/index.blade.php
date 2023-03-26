@@ -194,6 +194,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
+            
                 <div class="offer-tabs">
                     <ul class="nav nav-tabs" id="offerTab" role="tablist">
                         <li class="nav-item">

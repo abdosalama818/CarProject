@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('discountcats', function (Blueprint $table) {
+        Schema::create('bigdiscounts', function (Blueprint $table) {
             $table->id();
 
 
-            
             $table->text('name')->nullable();
 
             $table->string('discount_value')->nullable();
@@ -28,7 +27,10 @@ return new class extends Migration
             $table->text('discount_end')->nullable();
             $table->string('discount_number')->nullable();
 
-            $table->foreignId('cat_id')->constrained('cats')->onDelete('cascade')->onUpdate('cascade')->nullable();
+			$table->bigInteger('model_car_id')->unsigned()->nullable();
+			$table->bigInteger('cat_id')->unsigned()->nullable();
+			$table->bigInteger('brand_id')->unsigned()->nullable();
+
             $table->timestamps();
         });
     }
@@ -40,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discountcats');
+        Schema::dropIfExists('bigdiscounts');
     }
 };

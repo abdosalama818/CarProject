@@ -19,5 +19,11 @@ class Brand extends Model
     }
 
 
+
+    public function discount(){
+        return $this->hasOne(Bigdiscount::class,'brand_id');
+    }
+
+
   
 }

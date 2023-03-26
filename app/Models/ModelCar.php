@@ -20,7 +20,9 @@ class ModelCar extends Model
     }
 
 
-  
+    public function discount(){
+        return $this->hasOne(Bigdiscount::class,'model_car_id');
+    }
 
     
 }

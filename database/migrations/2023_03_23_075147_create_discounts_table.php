@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('discount_number')->nullable();
 
             
-
+            
             $table->foreignId('car_id')->constrained('cars')->onDelete('cascade')->onUpdate('cascade')->nullable();
 
 

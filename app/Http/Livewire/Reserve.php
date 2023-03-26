@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Car;
 use App\Models\Order;
 use Livewire\Component;
+use App\Models\Bigdiscount;
 use App\Models\Personalinformation;
 use Illuminate\Support\Facades\Route;
 
@@ -83,11 +84,28 @@ class Reserve extends Component
             'Work_Address' => 'required',
         ]);  
  */
-     
+$big_discount = Bigdiscount::all();
+       
+foreach($big_discount as $dis){
+    $car = Car::where('id',intval($this->car))->first();
+  /*   $car = Car::where('id',intval($this->car))->orWhere('cat_id',$dis->cat_id)->orWhere('model_car_id',$dis->model_car_id)
+    ->orWhere('brand_id',$dis->brand_id)->first(); */
+ 
+    $price = $car->price;
+  
+   
+    if($car->cat_id == $dis->cat_id || $car->model_car_id == $dis->model_car_id ||$car->brand_id == $dis->brand_id  ){
+        $price = $car->price - ($dis->discount_value / 100) * $car->price ;
+        
+    }
 
-        $car = Car::where('id',intval($this->car))->first();
+   
+
+}
 
 
+
+  //  $car = Car::where('id',intval($this->car))->orWhere('')->first();
      
 
   
@@ -104,10 +122,10 @@ class Reserve extends Component
       $order =  Order::create([
             'user_id'=>1,
             'name'=>$car->name,
-            'price'=>$car->price,
+            'price'=>$price,
             'start_date'=>now(),
             'exp_date'=>$this->Expiry_Date,
-            'total_price'=>$car->price * $days,
+            'total_price'=>$price * $days,
             'number_days'=>$days,
         ]);
 
