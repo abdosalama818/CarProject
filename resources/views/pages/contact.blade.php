@@ -24,40 +24,51 @@
 
 <!-- Contact Area Start -->
 <section class="elgazal-contact-area section_70">
+
+  @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
     <div class="container">
         <div class="row">
             <div class="col-lg-7">
                 <div class="contact-left">
                     <h3>Get in touch</h3>
-                    <form>
+                <form class="card" action='{{ route("contact.store") }}' method="post" autocomplete="off">
+                                         @csrf
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="single-contact-field">
-                                    <input type="text" placeholder="Your Name">
+                                    <input type="text" placeholder="Your Name" name="name" >
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="single-contact-field">
-                                    <input type="email" placeholder="Email Address">
+                                    <input type="email" placeholder="Email Address"  name="email">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="single-contact-field">
-                                    <input type="text" placeholder="Subject">
+                                    <input type="text" placeholder="Subject"  name="sybject">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="single-contact-field">
-                                    <input type="tel" placeholder="Phone Number">
+                                    <input type="tel" placeholder="Phone Number"  name="phone">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="single-contact-field">
-                                    <textarea placeholder="Write here your message"></textarea>
+                                    <textarea placeholder="Write here your message"  name="msg"></textarea>
                                 </div>
                             </div>
                         </div>

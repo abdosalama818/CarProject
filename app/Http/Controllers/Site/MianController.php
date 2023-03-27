@@ -8,16 +8,17 @@ use App\Models\Cat;
 use App\Models\User;
 use App\Models\Brand;
 use Faker\Core\Number;
+use App\Models\Contact;
+use App\Models\Discount;
 use App\Models\ModelCar;
 use App\Trait\QueryTrait;
+use App\Models\Discountcat;
 use Illuminate\Http\Request;
+use App\Models\Discountbrand;
+use App\Models\Discountmodel;
 use Illuminate\Bus\Queueable;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
-use App\Models\Discount;
-use App\Models\Discountbrand;
-use App\Models\Discountcat;
-use App\Models\Discountmodel;
 
 class MianController extends Controller
 {
@@ -150,6 +151,30 @@ class MianController extends Controller
     public function contact(){
         return view('pages.contact');
     }
+
+    public function contactStore(Request $request){
+      
+
+        try{
+
+          Contact::create([
+            'name'=>$request->name,
+            'email'=>$request->email,
+            'sybject'=>$request->sybject,
+            'phone'=>$request->phone,
+            'msg'=>$request->msg,
+          ]);
+
+          return back();
+
+
+      } catch (\Exception $e){
+          
+
+        return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+      } 
+
+}
 
     public function about(){
         return view('pages.about');

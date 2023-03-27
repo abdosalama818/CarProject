@@ -69,6 +69,7 @@ class Kernel extends HttpKernel
 
         'Localization' => \App\Http\Middleware\Localization::class,
         'IsAdmin' => \App\Http\Middleware\IsAdmin::class,
+        'IsUser' => \App\Http\Middleware\IsUser::class,
 
         ///end
 

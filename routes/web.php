@@ -13,8 +13,10 @@ use App\Http\Controllers\Admin\ModelCarController;
 
 use App\Http\Controllers\Admin\AdminCrudController;
 use App\Http\Controllers\Admin\AdminSettingController;
+use App\Http\Controllers\Admin\ContatcRequest;
 use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\RequesrtedCarController;
+use App\Http\Controllers\User\DashboarUserController;
 use App\Mail\OrderShipped;
 use Illuminate\Support\Facades\Mail;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -99,6 +101,7 @@ Route::group(
 
           // admin Adminsetting controler 
           Route::resource('Adminsetting',AdminSettingController::class)->middleware(['auth','IsAdmin']);
+          Route::get('contact/request',[ContatcRequest::class,'contact'])->name('contact.request')->middleware(['auth','IsAdmin']);
          // Route::get('admin_delete/{id}',[AdminCrudController::class,'delete'])->name('Admin.delete');
  
  
@@ -120,8 +123,18 @@ Route::group(
 
       Route::get('/about',[MianController::class,'about'])->name('about');
       Route::get('/contact',[MianController::class,'contact'])->name('contact');
+      Route::post('/contact/store',[MianController::class,'contactStore'])->name('contact.store');
+      
+     //user 
+      Route::get('/dashbord/user',[DashboarUserController::class,'index'])->name('dashbord.user')->middleware(['auth','IsUser']);
+      Route::get('/dashbord/user/request_car',[DashboarUserController::class,'request_car'])->name('dashbord.request_car')->middleware(['auth','IsUser']);
+      
+      Route::get('user/oldrquest',[DashboarUserController::class,'oldRequested'])->name('user.oldrquest')->middleware(['auth','IsUser']);
+      Route::get('user/setting',[DashboarUserController::class,'userSetting'])->name('user.setting')->middleware(['auth','IsUser']);
+      Route::post('user/setting/update',[DashboarUserController::class,'userSettingUpdate'])->name('usersetting.update')->middleware(['auth','IsUser']);
+      Route::post('user/generalinfo/update',[DashboarUserController::class,'userGeneralInformationUpdate'])->name('usersettingGeneralInfo.update')->middleware(['auth','IsUser']);
 
-
+      
     
       //Route::get('/store/reserve/{id}',[MianController::class,'storeReserveCar'])->name('car.reserve_store');
       

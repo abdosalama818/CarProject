@@ -88,15 +88,29 @@ $big_discount = Bigdiscount::all();
        
 foreach($big_discount as $dis){
     $car = Car::where('id',intval($this->car))->first();
-  /*   $car = Car::where('id',intval($this->car))->orWhere('cat_id',$dis->cat_id)->orWhere('model_car_id',$dis->model_car_id)
-    ->orWhere('brand_id',$dis->brand_id)->first(); */
+ 
  
     $price = $car->price;
+    $discount_number = $dis->discount_number;
   
    
-    if($car->cat_id == $dis->cat_id || $car->model_car_id == $dis->model_car_id ||$car->brand_id == $dis->brand_id  ){
-        $price = $car->price - ($dis->discount_value / 100) * $car->price ;
+    if(($car->cat_id == $dis->cat_id || $car->model_car_id == $dis->model_car_id ||$car->brand_id == $dis->brand_id ) && $dis->discount_type =='precent' ){
+        if($dis->discount_number !=0){
+            $price = $car->price - ($dis->discount_value / 100) * $car->price ;
+            $dis->update([
+                'discount_number'=>  --$discount_number ,
+            ]);
+        }
+      
+      
+    }else{
         
+        if($dis->discount_number !=0){
+        $price = $car->price - $dis->discount_value ;
+        $dis->update([
+            'discount_number'=>  --$discount_number ,
+        ]);
+    }
     }
 
    
@@ -104,8 +118,6 @@ foreach($big_discount as $dis){
 }
 
 
-
-  //  $car = Car::where('id',intval($this->car))->orWhere('')->first();
      
 
   

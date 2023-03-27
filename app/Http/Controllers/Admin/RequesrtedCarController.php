@@ -19,6 +19,7 @@ class RequesrtedCarController extends Controller
 
    public function carDetails($id){
     $car = $this->getDataById(new Car(),$id);
+    
     return view('pages.car-details')->with(compact('car')) ;
    }
 

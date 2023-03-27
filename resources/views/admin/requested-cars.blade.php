@@ -58,19 +58,23 @@
                                         <td>{{$order->name}}</td>
                                       @foreach ($order->cars as $car )
                                             <td>
-                                            <a href="{{"cardetails/$car->id"}}" class="btn btn-secondary">Link</a>
+                                            <a href="{{route("car.details",$car->id)}}" class="btn btn-secondary">Link</a>
                                         </td>
                                       @endforeach
                                         <td>{{$order->start_date}}</td>
                                         <td>{{$order->exp_date}}</td>
+                                        @if($order->status == 'paid')
                                         <td style="color: green">{{$order->status}}</td>
+
+                                        @endif
+                                        <td style="color: red">{{$order->status}}</td>
                                        
 
                                       @foreach ($order->cars as $car )
                                                <td>
                                             <div>
-                                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg{{$car->id}}">Details</button>
-                                                <div class="modal fade bd-example-modal-lg{{$car->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg{{$order->id}}">Details</button>
+                                                <div class="modal fade bd-example-modal-lg{{$order->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
