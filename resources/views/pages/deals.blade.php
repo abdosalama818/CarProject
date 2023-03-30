@@ -146,32 +146,85 @@
                     </div>
                     <div class="car-grid-list">
                         <div class="row">
-                        @foreach ($cars_p as $car_p ) {{-- foreach loop start --}}
+                        @foreach ($cars as $car_dis ) {{-- foreach loop start --}}
                               <div class="col-md-6">
                                 <div class="single-offers">
                                     <div class="offer-image">
                                         <a href="#">
-                                            <img src='{{asset("uploads"."/".$car_p->car->img)}}' alt="offer 1"/>
+                                            <img src='{{asset("uploads"."/".$car_dis->car->img)}}' alt="offer 1"/>
+                                        </a>
+                                    </div>
+                                    <div class="offer-text">
+                                        <a href="#">
+                                            <h3>  {{$car_dis->car->name}} </h3>
+                                         
+                                        </a>
+                                        <h4><del>$ {{$car_dis->car->price}}</del>
+
+                                      @if ($car_dis->discount_type == 'precent')
+                                            
+                                                ${{$car_dis->car->price - ($car_dis->discount_value / 100)* $car_dis->car->price}}
+                                        @elseif ($car_dis->discount_type  == 'flat')
+                                         ${{$car_dis->car->price - $car_dis->discount_value}}
+
+                                        @endif
+                                         
+                                         <span> Day / {{$car_dis->dicount_days}}</span></h4>
+                                        <ul>
+                                           {{--  <li><i class="fa fa-car"></i>Model:{{$car_p->modelcar->name}}</li> --}}
+                                            <li><i class="fa fa-cogs"></i>Automatic</li>
+                                            <li><i class="fa fa-dashboard"></i>20kmpl</li>
+                                        </ul>
+                                        <div class="offer-action">
+                                            <a href="{{route('car.reserve',$car_dis->car->id)}}" class="offer-btn-1">Rent Car</a>
+                                            <a href="{{route('car.details',$car_dis->car->id)}}" class="offer-btn-2">Details</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach   {{-- foreach loop end --}}
+
+
+                           @foreach ($cars_Cat as $car_p ) {{-- foreach loop start --}}
+                           @foreach ($car_p->cat->cars as $car_pp )
+                         
+                               
+                              <div class="col-md-6">
+                                <div class="single-offers">
+                                    <div class="offer-image">
+                                        <a href="#">
+                                            <img src='{{asset("uploads"."/".$car_p->img)}}' alt="offer 1"/>
                                         </a>
                                     </div>
                                     <div class="offer-text">
                                         <a href="#">
                                             <h3>  {{$car_p->name}} </h3>
                                         </a>
-                                        <h4><del>${{$car_p->car->price}}</del> ${{$discount_price}}<span> Day / {{$discount_days}}</span></h4>
+                                        <h4><del>${{$car_pp->price}}</del>
+                                        @if ($car_p->discount_type == 'precent')
+                                            
+                                                ${{$car_pp->price - ($car_p->discount_value / 100)* $car_pp->price}}
+                                        @elseif ($car_p->discount_type == 'flat')
+                                         ${{$car_pp->price - $car_p->discount_value}}
+
+                                        @endif
+
+                                        <span> Day / {{$car_p->discount_days}}</span></h4>
                                         <ul>
-                                            <li><i class="fa fa-car"></i>Model:{{$car_p->car->modelcar->name}}</li>
+                                            <li><i class="fa fa-car"></i>Model:{{$car_p->name}}</li>
                                             <li><i class="fa fa-cogs"></i>Automatic</li>
                                             <li><i class="fa fa-dashboard"></i>20kmpl</li>
                                         </ul>
                                         <div class="offer-action">
-                                            <a href="{{route('car.reserve',$car_p->car->id)}}" class="offer-btn-1">Rent Car</a>
-                                            <a href="{{route('car.details',$car_p->car->id)}}" class="offer-btn-2">Details</a>
+                                            <a href="{{route('car.reserve',$car_p->id)}}" class="offer-btn-1">Rent Car</a>
+                                            <a href="{{route('car.details',$car_p->id)}}" class="offer-btn-2">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach   {{-- foreach loop end --}}
+                           @endforeach
+
+                        @endforeach 
                           
                          {{--    <div class="col-md-6">
                                 <div class="single-offers">
@@ -301,7 +354,7 @@
                     </div>
                   
                        
-                       {{ $cars_p->links() }} 
+                     {{--   {{ $cars_p->links() }}  --}}
                     
                 </div>
             </div>

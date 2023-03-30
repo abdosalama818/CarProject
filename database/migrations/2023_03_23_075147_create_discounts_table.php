@@ -26,6 +26,8 @@ return new class extends Migration
             $table->text('discount_start')->nullable();
             $table->text('discount_end')->nullable();
             $table->string('discount_number')->nullable();
+            $table->string('discount_days')->nullable();
+
 
             
             

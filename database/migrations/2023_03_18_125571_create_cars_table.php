@@ -22,8 +22,7 @@ return new class extends Migration
             $table->text('seats')->nullable();
             $table->text('type')->nullable();
             $table->text('img')->nullable();//main image
-            //$table->enum('type' , ['paid' , 'unpaid' ])->default('unpaid')->nullable();
-
+           
         
           
             $table->foreignId('cat_id')->constrained('cats')->onDelete('cascade')->onUpdate('cascade');

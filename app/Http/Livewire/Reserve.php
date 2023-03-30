@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Order;
 use Livewire\Component;
 use App\Models\Bigdiscount;
+use App\Models\Discount;
 use App\Models\Personalinformation;
 use Illuminate\Support\Facades\Route;
 
@@ -85,7 +86,32 @@ class Reserve extends Component
         ]);  
  */
 $big_discount = Bigdiscount::all();
+$car = Car::where('id',intval($this->car))->first();
+
+$discount = Discount::where('car_id',intval($this->car))->first();
+$price =$car->price;     
+$name = $car->name ;   
+if($discount ){
+    $discount_number = $discount->discount_number;
+    if($discount->discount_number !=0){
        
+        $price = $discount->car->price - ($discount->discount_value / 100) * $discount->car->price ;
+        $discount->update([
+            'discount_number'=>  --$discount_number ,
+        ]);
+    }else{
+        
+        if($discount->discount_number !=0){
+        $price = $discount->car->price - $discount->discount_value ;
+        $discount->update([
+            'discount_number'=>  --$discount_number ,
+        ]);
+    }
+    }
+}
+ 
+
+
 foreach($big_discount as $dis){
     $car = Car::where('id',intval($this->car))->first();
  

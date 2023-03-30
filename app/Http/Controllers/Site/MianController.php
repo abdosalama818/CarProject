@@ -19,6 +19,8 @@ use App\Models\Discountmodel;
 use Illuminate\Bus\Queueable;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
+use App\Models\Bigdiscount;
+use Symfony\Component\CssSelector\Node\ElementNode;
 
 class MianController extends Controller
 {
@@ -27,38 +29,36 @@ class MianController extends Controller
     public function index()
     {
 
-   
+
 
         $cats = $this->getAllData(new Cat());
         $models = $this->getAllData(new ModelCar());
-      //  $brands = $this->getAllData(new Brand());
+        //  $brands = $this->getAllData(new Brand());
         $cars = $this->getAllData(new Car());
-       $brands = Brand::with('discount')->get();
-      $brands = Brand::all();
-       return view('pages.index')->with(compact('cats','models','brands','cars'));
+        $brands = Brand::with('discount')->get();
+        $brands = Brand::all();
+        return view('pages.index')->with(compact('cats', 'models', 'brands', 'cars'));
     }
 
- 
-   
+
+
     public function findCar(Request $request)
     {
-        $car = Car::where('name','LIKE','%'.$request->name.'%')
-        ->orWhere('model_car_id',$request->model)
-        ->Where('cat_id',$request->cat)
-        ->Where('brand_id',$request->brand)->first();
+        $car = Car::where('name', 'LIKE', '%' . $request->name . '%')
+            ->orWhere('model_car_id', $request->model)
+            ->Where('cat_id', $request->cat)
+            ->Where('brand_id', $request->brand)->first();
         //return $car->img ;
-        if($car){
-            return view('pages.car-details')->with(compact('car')) ;
-
+        if ($car) {
+            return view('pages.car-details')->with(compact('car'));
         }
         return back();
-
     }
 
     public function reserve()
     {
-       //$car = $this->getDataById(new Car(),$id);
-       return view('livewire.resevecar')/* ->with(compact('car') ) */;
+        //$car = $this->getDataById(new Car(),$id);
+        return view('livewire.resevecar')/* ->with(compact('car') ) */;
     }
 
 
@@ -72,52 +72,41 @@ class MianController extends Controller
 
     public function deals()
     {
-      /*   $cats = $this->getAllData(new Cat());
-        $models = $this->getAllData(new ModelCar());
-        $cars = $this->getAllData(new Car());
-        $brands = $this->getAllData(new Brand()); */
-       // $cars = $this->getAllData(new Car());
-       $cars = $this->getAllData(new Car());
-        $cars_p = Discount::with('car')->orderBy('id')->paginate(6);
-    $cats = Cat::with('discount')->get();
-    $models = ModelCar::with('discount')->get();
-    $brands = Brand::with('discount')->get();
 
-              foreach($cars_p as $car_p){
+        $cars = Discount::with('car')->orderBy('id')->paginate(6);
+        $cars_Cat = Bigdiscount::with(['cat','model','brand'])->orderBy('id')->paginate(6);
+        $cats = Cat::with('discount')->get();
+        $models = ModelCar::with('discount')->get();
+       $brands = Brand::with('discount')->get();
 
-               
-
-                    if($car_p->discount_type == 'precent'){
-
-                    
-                        $discount_price = $car_p->car->price - ($car_p->discount_value / 100)*$car_p->car->price ;
-                    }elseif($car_p->discount_type == 'flat'){
-                     
-                        $discount_price = $car_p->car->price - $car_p->discount_value  ;
-                    }
-            //to count discount day start 
-               $discount_end=strtotime($car_p->discount_end);
-               $discount_start=strtotime($car_p->discount_start);
-               $time=$discount_end - $discount_start;
-               $discount_days= date('d', $time); 
-            //to count discount day end 
-
-      
-         
-
-           }
+        
+  
+        if($cars_Cat->isEmpty()){
+            $cars_Cat = [] ;
+            
+            return view('pages.deals')->with(compact('cats','models','brands','cars','cars_Cat'));
 
 
+        }
 
-       return view('pages.deals')->with(compact('cars_p','cats','models','brands','cars','discount_price','discount_days'));
+
+       return view('pages.deals')->with(compact('cats','models','brands','cars','cars_Cat'));
     }
+     
+    
+
+     
+   
 
 
 
-    public function fleats(){
+
+
+    public function fleats()
+    {
         $cats = $this->getAllData(new Cat());
         $models = $this->getAllData(new ModelCar());
-       // $cars = $this->getAllData(new Car());
+        // $cars = $this->getAllData(new Car());
 
         $cars = Car::paginate(6);
 
@@ -127,19 +116,66 @@ class MianController extends Controller
 
 
 
-        return view('pages.cars')->with(compact('cats','models','brands','cars'));
+        return view('pages.cars')->with(compact('cats', 'models', 'brands', 'cars'));
     }
+
+
+
+    public function fleats_brand($id)
+    {
+
+        $cars = Car::where('brand_id', $id)->paginate(6);
+        $cats = $this->getAllData(new Cat());
+        $models = $this->getAllData(new ModelCar());
+        // $cars = $this->getAllData(new Car());
+
+        //$cars = Car::paginate(6);
+
+        $brands = $this->getAllData(new Brand());
+        return view('pages.carsBrand')->with(compact('cats', 'models', 'brands', 'cars'));
+    }
+
+    public function fleats_cat($id)
+    {
+
+        $cars = Car::where('cat_id', $id)->paginate(6);
+        $cats = $this->getAllData(new Cat());
+        $models = $this->getAllData(new ModelCar());
+        // $cars = $this->getAllData(new Car());
+
+        //$cars = Car::paginate(6);
+
+        $brands = $this->getAllData(new Brand());
+        return view('pages.carsCat')->with(compact('cats', 'models', 'brands', 'cars'));
+    }
+
+    public function fleats_model($id)
+    {
+
+        $cars = Car::where('model_car_id', $id)->paginate(6);
+        $cats = $this->getAllData(new Cat());
+        $models = $this->getAllData(new ModelCar());
+        // $cars = $this->getAllData(new Car());
+
+        //$cars = Car::paginate(6);
+
+        $brands = $this->getAllData(new Brand());
+        return view('pages.carsModel')->with(compact('cats', 'models', 'brands', 'cars'));
+    }
+
+
+
+
+
 
     public function car_datails($id)
     {
-        $car =Car::findOrFail($id);
-       /*  return $car; */
-        if($car){
-            return view('pages.car-details')->with(compact('car')) ;
-
+        $car = Car::findOrFail($id);
+        /*  return $car; */
+        if ($car) {
+            return view('pages.car-details')->with(compact('car'));
         }
         return back();
-
     }
 
 
@@ -148,36 +184,35 @@ class MianController extends Controller
 
 
 
-    public function contact(){
+    public function contact()
+    {
         return view('pages.contact');
     }
 
-    public function contactStore(Request $request){
-      
-
-        try{
-
-          Contact::create([
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'sybject'=>$request->sybject,
-            'phone'=>$request->phone,
-            'msg'=>$request->msg,
-          ]);
-
-          return back();
+    public function contactStore(Request $request)
+    {
 
 
-      } catch (\Exception $e){
-          
+        try {
 
-        return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
-      } 
+            Contact::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'sybject' => $request->sybject,
+                'phone' => $request->phone,
+                'msg' => $request->msg,
+            ]);
 
-}
+            return back();
+        } catch (\Exception $e) {
 
-    public function about(){
-        return view('pages.about');
+
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
+    public function about()
+    {
+        return view('pages.about');
+    }
 }

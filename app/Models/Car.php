@@ -44,7 +44,7 @@ class Car extends Model
     }
 
     public function discount(){
-        return $this->hasOne(Bigdiscount::class,'car_id');
+        return $this->hasOne(Discount::class,'car_id');
     }
 
 

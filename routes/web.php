@@ -116,6 +116,10 @@ Route::group(
       Route::get('/',[MianController::class,'index'])->name('home');
       Route::get('/deals',[MianController::class,'deals'])->name('deals');
       Route::get('/fleats',[MianController::class,'fleats'])->name('fleats');
+      Route::get('/fleats/brand/{id}',[MianController::class,'fleats_brand'])->name('fleats.brand');
+      Route::get('/fleats/cat/{id}',[MianController::class,'fleats_cat'])->name('fleats.cat');
+      Route::get('/fleats/model/{id}',[MianController::class,'fleats_model'])->name('fleats.model');
+      
       Route::get('/car/search',[MianController::class,'findCar'])->name('car.search');
       Route::get('/resevecar/{id}',[MianController::class,'reserve'])->name('car.reserve');
       Route::get('/car/details/{id}',[MianController::class,'car_datails'])->name('car.details');

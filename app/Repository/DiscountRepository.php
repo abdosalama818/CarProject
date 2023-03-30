@@ -2,12 +2,13 @@
 
 namespace App\Repository ;
 
+use App\Models\Car;
 use App\Models\Cat;
 use App\Models\Brand;
+use App\Models\Discount;
+use App\Models\Bigdiscount;
 use App\Interface\BrandInterface;
 use App\Interface\DiscountInterface;
-use App\Models\Bigdiscount;
-use App\Models\Discount;
 
 
 class DiscountRepository implements DiscountInterface{
@@ -15,10 +16,17 @@ class DiscountRepository implements DiscountInterface{
  
     public function store($request){
        
-
+        //to count discount day start 
+        $discount_end=strtotime($request->discount_end);
+        $discount_start=strtotime($request->discount_start);
+        $time=$discount_end - $discount_start;
+        $discount_days= date('d', $time); 
+     //to count discount day end 
       if(!empty($request->cat_id) ||  !empty($request->brand_id) || !empty($request->model_id)){
   
 
+
+      
       Bigdiscount::create([
          
   
@@ -38,9 +46,11 @@ class DiscountRepository implements DiscountInterface{
            'discount_number'=>$request->discount_number,
            'discount_start'=>$request->discount_start,
            'discount_end'=>$request->discount_end,
+           'discount_days'=>$discount_days
            
       ]);
     }else{
+
       Discount::create([
         'car_id'=> $request->car_id,
      
@@ -55,6 +65,7 @@ class DiscountRepository implements DiscountInterface{
            'discount_number'=>$request->discount_number,
            'discount_start'=>$request->discount_start,
            'discount_end'=>$request->discount_end,
+           'discount_days'=>$discount_days
            
       ]);
     } 
