@@ -9,6 +9,7 @@ use Livewire\Component;
 use App\Models\Bigdiscount;
 use App\Models\Discount;
 use App\Models\Personalinformation;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 class Reserve extends Component
@@ -158,7 +159,7 @@ foreach($big_discount as $dis){
 
 
       $order =  Order::create([
-            'user_id'=>1,
+            'user_id'=>Auth::id(),
             'name'=>$car->name,
             'price'=>$price,
             'start_date'=>now(),
