@@ -44,13 +44,21 @@ class MianController extends Controller
 
     public function findCar(Request $request)
     {
-        $car = Car::where('name', 'LIKE', '%' . $request->name . '%')
+        $cars = Car::where('name', 'LIKE', '%' . $request->name . '%')
             ->orWhere('model_car_id', $request->model)
             ->Where('cat_id', $request->cat)
-            ->Where('brand_id', $request->brand)->first();
+            ->Where('brand_id', $request->brand)->paginate(6);
+            $cats = $this->getAllData(new Cat());
+            $models = $this->getAllData(new ModelCar());
+            // $cars = $this->getAllData(new Car());
+    
+           
+    
+            $brands = $this->getAllData(new Brand());
         //return $car->img ;
-        if ($car) {
-            return view('pages.car-details')->with(compact('car'));
+        if ($cars) {
+            return view('pages.cars')->with(compact('cats', 'models', 'brands', 'cars'));
+
         }
         return back();
     }

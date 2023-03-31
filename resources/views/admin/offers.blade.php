@@ -378,6 +378,7 @@
                                     <tr>    
                                         <?php $i++; ?>
                                            <td>{{ $i }}</td>
+                                           
                                       
                                         <td>{{ $discount_car->name }}</td>
                                         <td>{{ $discount_car->car->name }}</td>

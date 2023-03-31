@@ -121,7 +121,7 @@ Route::group(
       Route::get('/fleats/model/{id}',[MianController::class,'fleats_model'])->name('fleats.model');
       
       Route::get('/car/search',[MianController::class,'findCar'])->name('car.search');
-      Route::get('/resevecar/{id}',[MianController::class,'reserve'])->name('car.reserve');
+      Route::get('/resevecar/{id}',[MianController::class,'reserve'])->name('car.reserve')->middleware(['auth','IsUser']);;
       Route::get('/car/details/{id}',[MianController::class,'car_datails'])->name('car.details');
 
 

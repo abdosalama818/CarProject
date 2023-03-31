@@ -75,7 +75,7 @@ class Reserve extends Component
 
  
     public function firstSubmit(){
-      /*    $validatedData = $this->validate([
+       $validatedData = $this->validate([
             'ID_Number' => 'required',
             'Birthday' => 'required',
             'ID_Name' => 'required',
@@ -84,7 +84,7 @@ class Reserve extends Component
             'Home_Address' => 'required',
             'Work_Address' => 'required',
         ]);  
- */
+
 $big_discount = Bigdiscount::all();
 $car = Car::where('id',intval($this->car))->first();
 
