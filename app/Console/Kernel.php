@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Order;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -17,49 +19,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-       
-        $users = User::all();
-        foreach($users as $user){
-            if(!empty($user->orders)){
-                foreach($user->orders as $order){
-                     $time = $order->exp_date;
-                     $time2=strtotime($time);
-                     $day = date('d',$time2) ; //to get day in date
-                  
-                     
-                     $send_time = Carbon::parse( $time)->subHours(2)->format('H:i'); //time befor exorire b 2 hours
 
-                   
-                   $schedule->command('send:email')->monthlyOn($day,  $send_time);//1, 16, '13:00'
-                       
-                     
-                    
 
-      
 
-                  
-                }
-            
-            }
-           
-         }
-
-        
-      
-    
-       
-          
-        
-        
-      
-       
     }
 
-    /**
-     * Register the commands for the application.
-     *
-     * @return void
-     */
+
     protected function commands()
     {
         $this->load(__DIR__.'/Commands');

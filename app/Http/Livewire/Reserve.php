@@ -4,13 +4,19 @@ namespace App\Http\Livewire;
 
 use Carbon\Carbon;
 use App\Models\Car;
+use App\Models\User;
 use App\Models\Order;
 use Livewire\Component;
-use App\Models\Bigdiscount;
 use App\Models\Discount;
+use App\Models\Bigdiscount;
+use App\Events\SendEmailEvents;
 use App\Models\Personalinformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Notifications\OrderNotification;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Session;
+
 
 class Reserve extends Component
 {
@@ -22,18 +28,18 @@ class Reserve extends Component
     public  $branch,$place,$Address;
 
     public  $card_name,$card_number,$exp,$cvcpwd;
-    
-  
+
+
     public $car;
 
 
     public function mount()
-    
+
     {
-    
+
         $car = Route::current()->parameter('id');
         $this->car = $car;
-    } 
+    }
 
 
 
@@ -41,11 +47,11 @@ class Reserve extends Component
 
 
 
-        
+
    public function updated($propertyName)
     {
         $this->validateOnly($propertyName, [
-           
+
              'ID_Number' => 'required',
             'Birthday' => 'required',
             'ID_Name' => 'required',
@@ -57,24 +63,24 @@ class Reserve extends Component
             'card_name' => 'required',
             'card_number' => 'required',
             'exp' => 'required',
-            'cvcpwd' => 'required', 
-          
+            'cvcpwd' => 'required',
+
             'branch' => 'required',
             'place' => 'required',
-            'Address' => 'required', 
+            'Address' => 'required',
 
              'card_name' => 'required',
             'card_number' => 'required',
             'exp' => 'required',
-            'cvcpwd' => 'required', 
-            
-            
-           
+            'cvcpwd' => 'required',
+
+
+
 
         ]);
-    } 
+    }
 
- 
+
     public function firstSubmit(){
        $validatedData = $this->validate([
             'ID_Number' => 'required',
@@ -84,24 +90,24 @@ class Reserve extends Component
             'Expiry_Date' => 'required',
             'Home_Address' => 'required',
             'Work_Address' => 'required',
-        ]);  
+        ]);
 
 $big_discount = Bigdiscount::all();
 $car = Car::where('id',intval($this->car))->first();
 
 $discount = Discount::where('car_id',intval($this->car))->first();
-$price =$car->price;     
-$name = $car->name ;   
+$price =$car->price;
+$name = $car->name ;
 if($discount ){
     $discount_number = $discount->discount_number;
     if($discount->discount_number !=0){
-       
+
         $price = $discount->car->price - ($discount->discount_value / 100) * $discount->car->price ;
         $discount->update([
             'discount_number'=>  --$discount_number ,
         ]);
     }else{
-        
+
         if($discount->discount_number !=0){
         $price = $discount->car->price - $discount->discount_value ;
         $discount->update([
@@ -110,17 +116,17 @@ if($discount ){
     }
     }
 }
- 
+
 
 
 foreach($big_discount as $dis){
     $car = Car::where('id',intval($this->car))->first();
- 
- 
+
+
     $price = $car->price;
     $discount_number = $dis->discount_number;
-  
-   
+
+
     if(($car->cat_id == $dis->cat_id || $car->model_car_id == $dis->model_car_id ||$car->brand_id == $dis->brand_id ) && $dis->discount_type =='precent' ){
         if($dis->discount_number !=0){
             $price = $car->price - ($dis->discount_value / 100) * $car->price ;
@@ -128,10 +134,10 @@ foreach($big_discount as $dis){
                 'discount_number'=>  --$discount_number ,
             ]);
         }
-      
-      
+
+
     }else{
-        
+
         if($dis->discount_number !=0){
         $price = $car->price - $dis->discount_value ;
         $dis->update([
@@ -140,40 +146,46 @@ foreach($big_discount as $dis){
     }
     }
 
-   
+
 
 }
 
 
-     
 
-  
+
+
       $expire_date = $this->Expiry_Date;
-      $current_date =now();
+      $current_date =$this->Birthday;
       $time1=strtotime($expire_date);
       $time2=strtotime($current_date);
       $time=$time1 - $time2;
      $days= date('d', $time);
 
-       
+
 
 
       $order =  Order::create([
             'user_id'=>Auth::id(),
             'name'=>$car->name,
             'price'=>$price,
-            'start_date'=>now(),
+            'start_date'=>$this->Birthday,
             'exp_date'=>$this->Expiry_Date,
             'total_price'=>$price * $days,
             'number_days'=>$days,
         ]);
 
         $order->cars()->attach($car->id);
-
+        //$user = User::findOrFail(Auth::id());
+        //event(new SendEmailEvents($user));
+        //Notification::send($user,new OrderNotification($order));
+        //Session::forget('Subtotal1');
+       // Session::forget('total1');
+        Session::put('Subtotal1', $price);
+        Session::put('total1', $price * $days);
 
         $this->currentStep=2;
 
-       
+
     }
 
     public function secondSubmit(){
@@ -181,25 +193,25 @@ foreach($big_discount as $dis){
             'branch' => 'required',
             'place' => 'required',
             'Address' => 'required',
-        ]); 
+        ]);
         $this->currentStep=3;
-   
+
     }
     public function thirdSubmit(){
        $validatedData = $this->validate([
             'card_name' => 'required',
             'card_number' => 'required',
             'exp' => 'required',
-            'cvcpwd' => 'required', 
-        ]); 
-        
+            'cvcpwd' => 'required',
+        ]);
+
        $this->currentStep=4;
-     
+
     }
 
 
     public function submitForm(){
-      
+
         Personalinformation::create([
             'ID_Number' => $this->ID_Number,
             'Birthday' => $this->Birthday,
@@ -209,23 +221,27 @@ foreach($big_discount as $dis){
             'Home_Address' => $this->Home_Address,
             'Work_Address' => $this->Work_Address,
 
-          
-          
+
+
             'branch' => $this->branch,
             'place' => $this->place,
-            'Address' => $this->Address, 
+            'Address' => $this->Address,
 
              'card_name' => $this->card_name,
             'card_number' => $this->card_number,
             'exp' => $this->exp,
-            'cvcpwd' => $this->cvcpwd, 
-            'user_id' => 1, 
+            'cvcpwd' => $this->cvcpwd,
+            'user_id' => Auth::id(),
         ]);
+        Session::forget('Subtotal1');
+        Session::forget('total1');
        $this->currentStep=5;
-     
+
+
+
     }
 
-    
+
     public function render()
     { $car = Car::where('id',intval($this->car))->first();
         return view('livewire.reserve',[

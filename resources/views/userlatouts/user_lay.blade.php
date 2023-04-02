@@ -186,7 +186,7 @@
                     <div id="sidebar-menu">
                         <ul class="sidebar-links" id="simple-bar">
                             <li class="back-btn">
-                                <a href="index.html">
+                                <a href="{{route('dashbord.user')}}">
                                     <img class="img-fluid" src="{{asset("assets/images/logo-icon.png")}}" alt="">
                                 </a>
                                 <div class="mobile-back text-end">
@@ -195,7 +195,7 @@
                                 </div>
                             </li>
                             <li class="sidebar-list">
-                                <a class="sidebar-link sidebar-title link-nav" href="index.html">
+                                <a class="sidebar-link sidebar-title link-nav" href="{{route('dashbord.user')}}">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <g>
@@ -212,7 +212,7 @@
                                     <span>Dashboard</span></a>
                             </li>
                             <li class="sidebar-list">
-                                <a class="sidebar-link sidebar-title link-nav" href="requested-cars.html">
+                                <a class="sidebar-link sidebar-title link-nav" href="{{route('dashbord.request_car')}}">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <g>
@@ -231,7 +231,7 @@
                                     <span>Requested Cars</span></a>
                             </li>
                             <li class="sidebar-list">
-                                <a class="sidebar-link sidebar-title link-nav" href="history.html">
+                                <a class="sidebar-link sidebar-title link-nav" href="{{route('user.oldrquest')}}">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <g>
@@ -250,7 +250,7 @@
                                     <span>History</span></a>
                             </li>
                             <li class="sidebar-list">
-                                <a class="sidebar-link sidebar-title link-nav" href="setting.html">
+                                <a class="sidebar-link sidebar-title link-nav" href="{{route('user.setting')}}">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <g>

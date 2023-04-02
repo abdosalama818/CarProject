@@ -7,11 +7,13 @@ use App\Models\Car;
 use App\Models\Cat;
 use App\Models\User;
 use App\Models\Brand;
+use App\Models\Order;
 use Faker\Core\Number;
 use App\Models\Contact;
 use App\Models\Discount;
 use App\Models\ModelCar;
 use App\Trait\QueryTrait;
+use App\Models\Bigdiscount;
 use App\Models\Discountcat;
 use Illuminate\Http\Request;
 use App\Models\Discountbrand;
@@ -19,7 +21,7 @@ use App\Models\Discountmodel;
 use Illuminate\Bus\Queueable;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
-use App\Models\Bigdiscount;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\CssSelector\Node\ElementNode;
 
 class MianController extends Controller
@@ -29,14 +31,16 @@ class MianController extends Controller
     public function index()
     {
 
+       
+        //return Session::get('variableName');
 
 
         $cats = $this->getAllData(new Cat());
         $models = $this->getAllData(new ModelCar());
-        //  $brands = $this->getAllData(new Brand());
+        $brands = $this->getAllData(new Brand());
         $cars = $this->getAllData(new Car());
-        $brands = Brand::with('discount')->get();
-        $brands = Brand::all();
+       // $brands = Brand::with('discount')->get();
+      //  $brands = Brand::all();
         return view('pages.index')->with(compact('cats', 'models', 'brands', 'cars'));
     }
 
@@ -51,9 +55,9 @@ class MianController extends Controller
             $cats = $this->getAllData(new Cat());
             $models = $this->getAllData(new ModelCar());
             // $cars = $this->getAllData(new Car());
-    
-           
-    
+
+
+
             $brands = $this->getAllData(new Brand());
         //return $car->img ;
         if ($cars) {
@@ -76,7 +80,7 @@ class MianController extends Controller
 
 
 
-    ///deals function  pages 
+    ///deals function  pages
 
     public function deals()
     {
@@ -87,11 +91,11 @@ class MianController extends Controller
         $models = ModelCar::with('discount')->get();
        $brands = Brand::with('discount')->get();
 
-        
-  
+
+
         if($cars_Cat->isEmpty()){
             $cars_Cat = [] ;
-            
+
             return view('pages.deals')->with(compact('cats','models','brands','cars','cars_Cat'));
 
 
@@ -100,11 +104,11 @@ class MianController extends Controller
 
        return view('pages.deals')->with(compact('cats','models','brands','cars','cars_Cat'));
     }
-     
-    
 
-     
-   
+
+
+
+
 
 
 

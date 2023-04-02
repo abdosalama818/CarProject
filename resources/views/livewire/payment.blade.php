@@ -87,7 +87,8 @@
                                     <tbody>
                                     <tr>
                                         <td>Cart Subtotal</td>
-                                        <td>$270</td>
+                                        <td>$  {{ Session::get('Subtotal1')}}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>Shipping and Handling</td>
@@ -95,7 +96,8 @@
                                     </tr>
                                     <tr>
                                         <td>Order Total</td>
-                                        <td>$270</td>
+                                        <td>$  {{ Session::get('total1')}}
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -111,5 +113,5 @@
                 <!-- /col -->
             </div>
    </div>
-        
+
 </section>

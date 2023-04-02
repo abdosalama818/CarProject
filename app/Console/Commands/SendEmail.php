@@ -2,9 +2,11 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Cat;
 use App\Models\User;
 use App\Events\SendEmailEvents;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 
 class SendEmail extends Command
 {
@@ -28,15 +30,16 @@ class SendEmail extends Command
      * @return int
      */
     public function handle()
-    {
-        $users = User::all();
-        foreach($users as $user){
-                if(!empty($user->orders))
-                {
-                    event(new SendEmailEvents($user));
 
-                }
+        {
+
+
+
+
+             event(new SendEmailEvents($user));
+
+
+
 
         }
-    }
 }

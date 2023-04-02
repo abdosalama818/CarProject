@@ -21,22 +21,44 @@
                 </div>
             </div>
             <div class="col-md-6">
+
                 <div class="header-top-right">
+@guest
+
                     <a href="{{route('login')}}">
                         <i class="fa fa-key"></i>
                         login
                     </a>
+
                     <a href="{{route('register')}}">
                         <i class="fa fa-user"></i>
                         register
                     </a>
+ @endguest
+
+ @auth
+ <a href="{{route('dashbord.user')}}">
+    <i class="fa fa-key"></i>
+    Dashbord
+</a>
+
+
+
+<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    Logout
+</a>
+
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    {{ csrf_field() }}
+</form>
+ @endauth
 
 
 
 
 
-                    {{-- 
-                    
+                    {{--
+
                        <div class="btn-group mb-1">
             <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               @if (App::getLocale() == 'ar')
@@ -55,10 +77,10 @@
                 @endforeach
             </div>
         </div>
-                    
+
                      --}}
 
-                  
+
 
                     <div class="dropdown">
 
@@ -129,7 +151,7 @@
 
 <!-- Mainmenu Area Start -->
 @component('components.navbarcomponent')
-    
+
 @endcomponent
 <!-- Mainmenu Area End -->
 @yield('content')

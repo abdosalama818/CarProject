@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'Name_Teacher'=>'اسم المعلم',
+    'home'=>'اسم المعلم',
     'Add_Teacher'=>'اضافة معلم',
     'Edit_Teacher'=>'تعديل معلم',
     'Delete_Teacher'=>'حذف معلم',
