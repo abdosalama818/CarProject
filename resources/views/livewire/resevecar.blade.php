@@ -37,8 +37,8 @@
     <!--Responsive css-->
     <link rel="stylesheet" href="{{asset('assetscar/css/responsive.css')}}">
       @livewireStyles
-      
-       
+
+
 </head>
 <body>
 <!-- Header Top Area Start -->
@@ -116,7 +116,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="header-action">
-                    <a href="contact.html"><i class="fa fa-phone"></i> Request a call</a>
+                    <a href="{{ route('contact') }}"><i class="fa fa-phone"></i> Request a call</a>
                 </div>
             </div>
         </div>
@@ -133,11 +133,11 @@
                 <div class="mainmenu">
                     <nav>
                         <ul id="elgazal_navigation">
-                            <li class="active"><a href="index.html">home</a></li>
-                            <li><a href="about.html">about</a></li>
-                            <li><a href="cars.html">Our Fleet</a></li>
-                            <li><a href="deals.html">Deals</a></li>
-                            <li><a href="contact.html">contact</a></li>
+                            <li class="active"><a href="{{ route('home') }}">home</a></li>
+                            <li><a href="{{ route('about') }}">about</a></li>
+                            <li><a href="{{ route('fleats') }}">Our Fleet</a></li>
+                            <li><a href="{{ route('deals') }}">Deals</a></li>
+                            <li><a href="{{ route('contact') }}">contact</a></li>
                         </ul>
                     </nav>
                 </div>

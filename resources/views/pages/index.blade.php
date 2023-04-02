@@ -58,7 +58,7 @@
                         <div class="col-md-8">
 
                             <div class="find-form">
-                            
+
                                  <form action="{{ route('car.search') }}" method="get">
                                     @csrf
                                     <div class="row">
@@ -71,7 +71,7 @@
                                             <p>
                                                 <select name='cat'>
                                                     <option>Car Category</option>
-                                                   
+
                                                     @foreach ($cats as $cat )
                                                           <option value="{{$cat->id}}">{{$cat->name}}</option>
                                                     @endforeach
@@ -82,7 +82,7 @@
                                             <p>
                                                 <select name='model'>
                                                     <option>Car Model</option>
-                                                    
+
                                                    @foreach ($models as $model )
                                                           <option value="{{$model->id}}">{{$model->name}}</option>
                                                     @endforeach
@@ -95,7 +95,7 @@
                                             <p>
                                                 <select>
                                                     <option name='brand'>Car Brand</option>
-                                                    
+
                                                    @foreach ($brands as $brand )
                                                           <option value="{{$brand->id}}">{{$brand->name}}</option>
                                                     @endforeach
@@ -194,7 +194,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-            
+
                 <div class="offer-tabs">
                     <ul class="nav nav-tabs" id="offerTab" role="tablist">
                         <li class="nav-item">
@@ -208,8 +208,8 @@
                         </li>
 
                         @endforeach
-                  
-                    
+
+
                     </ul>
                     <div class="tab-content" id="offerTabContent">
                         <!-- All Tab Start -->
@@ -370,7 +370,7 @@
                             <div class="row">
                             @foreach ($brands as $brand )
                                     @foreach ($brand->cars as $car )
-                                
+
                                         <div class="col-lg-4">
                                             <div class="single-offers">
                                                 <div class="offer-image">
@@ -379,7 +379,7 @@
                                                     </a>
                                                 </div>
                                                 <div class="offer-text">
-                                                    <a href="#">
+                                                    <a href="{{ route("car.details",$car->id) }}">
                                                         <h3>{{$car->name}}</h3>
                                                     </a>
                                                     <h4>{{$car->price}}<span>/ Day</span></h4>
@@ -389,8 +389,8 @@
                                                         <li><i class="fa fa-dashboard"></i>20kmpl</li>
                                                     </ul>
                                                     <div class="offer-action">
-                                                        <a href="#" class="offer-btn-1">Rent Car</a>
-                                                        <a href="#" class="offer-btn-2">Details</a>
+                                                        <a href="{{ route('car.reserve',$car->id) }}" class="offer-btn-1">Rent Car</a>
+                                                        <a href="{{ route("car.details",$car->id) }}" class="offer-btn-2">Details</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -398,7 +398,7 @@
                                      @endforeach
 
                             @endforeach
-                               
+
 {{--                                 <div class="col-lg-4">
                                     <div class="single-offers">
                                         <div class="offer-image">
@@ -809,6 +809,6 @@
     </div>
 </section>
 <!-- Call Area End -->
-    
+
 @endsection
 
