@@ -33,17 +33,19 @@ class AuthRequest extends FormRequest
             'name' => 'required|string|between:2,100',
             'email' => 'required|string|email|max:100|unique:users',
             'password' => 'required|string|confirmed|min:6',
+            'mobile' => 'required|min:10|max:20',
+
         ];
     }
 
     public function failedValidation(Validator $validator)
     {
 
-    
+
          throw new HttpResponseException(response()->json([
             'message' =>$validator->errors(),
             'status' => 0,
             'code' => 400,
-        ])); 
+        ]));
     }
 }

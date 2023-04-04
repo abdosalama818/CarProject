@@ -47,15 +47,16 @@ class AuthController extends Controller
 
 
         try{
-            $user = User::create([ 
+            $user = User::create([
                 'name' => $request->name,
                'email' => $request->email,
+               'mobile' => $request->mobile,
                 'password' => bcrypt($request->password)
                 ]
             );
     return response()->json([
         'message' => trans('main.success_reg'),
-        
+
         'status' => 1,
         'code' => 200,
         'user' => $user,
@@ -67,14 +68,14 @@ class AuthController extends Controller
                 'message' =>$td->getMessage(),
                     'status' => 0,
                     'code' => 400,
-    
+
                 ]);
         }
 
-  
+
     }
 
-   
+
     public function logout() {
         auth("api")->logout();
         return response()->json(['message' => 'User successfully signed out']);
