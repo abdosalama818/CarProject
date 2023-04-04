@@ -212,6 +212,30 @@ foreach($big_discount as $dis){
 
     public function submitForm(){
 
+        $personal = Personalinformation::where('user_id',Auth::id())->first();
+        if($personal){
+            $personal->update([
+                'ID_Number' => $this->ID_Number,
+                'Birthday' => $this->Birthday,
+                'ID_Name' => $this->ID_Name,
+                'Job' => $this->Job,
+                'Expiry_Date' => $this->Expiry_Date,
+                'Home_Address' => $this->Home_Address,
+                'Work_Address' => $this->Work_Address,
+
+
+
+                'branch' => $this->branch,
+                'place' => $this->place,
+                'Address' => $this->Address,
+
+                 'card_name' => $this->card_name,
+                'card_number' => $this->card_number,
+                'exp' => $this->exp,
+                'cvcpwd' => $this->cvcpwd,
+                'user_id' => Auth::id(),
+            ]);
+        }
         Personalinformation::create([
             'ID_Number' => $this->ID_Number,
             'Birthday' => $this->Birthday,

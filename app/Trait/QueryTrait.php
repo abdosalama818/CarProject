@@ -12,6 +12,11 @@ trait QueryTrait{
         return $model::findOrFail($id);
     }
 
+    public function getDataByIdApi($model , $id)
+    {
+        return $model::find($id);
+    }
+
     public function getDataByWhereText($model,$column_name,$search_text)
     {
         return $model::where("$column_name","$search_text")->get();

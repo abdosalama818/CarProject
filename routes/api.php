@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\APiMainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\OrderApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +31,34 @@ Route::group([
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
+    Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+
+});
+
+
+
+Route::group([
+    'middleware' => ['api','Localization',],
+
+], function ($router) {
+
+    Route::get('/cats', [APiMainController::class, 'cats']);
+    Route::get('/cat/{id}', [APiMainController::class, 'cat']);
+
+    Route::get('/brands', [APiMainController::class, 'brands']);
+    Route::get('/brand/{id}', [APiMainController::class, 'brand']);
+
+
+    Route::get('/ModelCars', [APiMainController::class, 'ModelCars']);
+    Route::get('/ModelCar/{id}', [APiMainController::class, 'modelcar']);
+
+    Route::get('/cars', [APiMainController::class, 'cars']);
+    Route::get('/car/{id}', [APiMainController::class, 'car']);
+
+    Route::get('/cars/discount', [APiMainController::class, 'carsWithDiscount']);
+    Route::get('/cars/discountwithBrandCatModel', [APiMainController::class, 'carsWithDiscountInCatBrandModel']);
+
+
+    Route::post('/order/store/{id}', [OrderApiController::class, 'store'])->middleware('jwt.auth');
 });
