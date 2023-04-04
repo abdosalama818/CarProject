@@ -23,7 +23,7 @@
 
 
 <!-- Contact Area Start -->
-<section class="elgazal-contact-area section_70">
+<section class="elgazal-contact-area section_70 main-rtl">
 
   @if ($errors->any())
                 <div class="alert alert-danger">
@@ -37,9 +37,9 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7">
-                <div class="contact-left">
+                <div class="contact-left text-right-rtl">
                     <h3>Get in touch</h3>
-                <form class="card" action='{{ route("contact.store") }}' method="post" autocomplete="off">
+                <form style="border:none" class="card" action='{{ route("contact.store") }}' method="post" autocomplete="off">
                                          @csrf
                         <div class="row">
                             <div class="col-md-6">
@@ -85,7 +85,7 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="contact-right">
+                <div class="contact-right text-right-rtl">
                     <h3>Contact information</h3>
                     <div class="contact-details">
                         <p><i class="fa fa-map-marker"></i> 125 Big fella St. Road, New York, Hi 5654775 </p>

@@ -5,29 +5,31 @@
                     <div class="single-booking">
                         <h3>Shhpping Information</h3>
                         <form>
-                            <div class="row">
+                   {{--          <div class="row">
                                 <div class="col-md-12">
                                     <p>
                                         <label>Reserve Place</label>
                                         <select id="slelectID" wire:model="place">
                                             <option selected >Select</option>
                                             <option value="1">From the branch</option>
-                                         
+
                                         </select>
                                     </p>
                                            @error('place')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="row">
                                 <div class="col-md-12">
                                     <p>
                                         <label>Branch name</label>
-                                        <select wire:model="branch">
+                                        <select wire:model="branch" class="form-control">
                                             <option selected >Select</option>
+                                            @foreach ($branches as $br )
+                                            <option value="{{ $br->id }}">{{ $br->name }}</option>
 
-                                          <option value="1">From the branch</option>
+                                            @endforeach
 
                                         </select>
 

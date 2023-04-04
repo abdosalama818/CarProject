@@ -27,3 +27,4 @@
     <link rel="stylesheet" href="{{asset('assetscar/css/style.css')}}">
     <!--Responsive css-->
     <link rel="stylesheet" href="{{asset('assetscar/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('assetscar/css/rtl.css')}}">

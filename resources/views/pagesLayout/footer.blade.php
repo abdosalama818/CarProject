@@ -1,11 +1,11 @@
 
 <!-- Footer Area Start -->
-<footer class="elgazal-footer-area">
+<footer class="elgazal-footer-area main-rtl">
     <div class="footer-top-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="single-footer">
+                <div class="col-lg-4 ">
+                    <div class="single-footer text-right-rtl">
                         <div class="footer-logo">
                             <a href="#">
                                 <img style="width: 125px;" src="{{asset('assetscar/img/logo.jpg')}}" alt="footer-logo"/>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-footer quick_links">
+                    <div class="single-footer quick_links text-right-rtl">
                         <h3>Quick Links</h3>
                         <ul class="quick-links">
                             <li><a href="#">About us</a></li>
@@ -39,16 +39,16 @@
                             <li><a href="#">Terms and Condition</a></li>
                         </ul>
                     </div>
-                    <div class="single-footer newsletter_box">
+                    <div class="single-footer newsletter_box text-right-rtl">
                         <h3>newsletter</h3>
-                        <form>
+                        <form style="direction: ltr">
                             <input type="email" placeholder="Email Address"/>
                             <button type="submit"><i class="fa fa-paper-plane"></i></button>
                         </form>
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="single-footer">
+                    <div class="single-footer text-right-rtl">
                         <h3>Recent Cars</h3>
                         <ul>
                             <li>
@@ -175,6 +175,7 @@
 <script src="{{asset('assetscar/js/main.js')}}"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

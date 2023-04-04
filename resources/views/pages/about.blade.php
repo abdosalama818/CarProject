@@ -28,7 +28,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
-                <div class="about-page-left">
+                <div class="about-page-left text-right-rtl">
                     <h4>About Us</h4>
                     <h3>We are committed to provide safe Ride solutions</h3>
                     <p><span>since 2003</span>,Claritas est etiam processus dynamicus, qui sequitur mutationem

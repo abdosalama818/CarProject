@@ -29,7 +29,7 @@
 
 
 <!-- Car Listing Area Start -->
-<section class="elgazal-car-listing section_70">
+<section class="elgazal-car-listing section_70 main-rtl">
     <div class="container">
         <div class="row">
             <div class="col-lg-4">

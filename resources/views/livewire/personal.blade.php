@@ -1,5 +1,5 @@
 <section style="padding: 20px 1px">
-    <div class="row justify-content-center" id="cardSection">
+    <div class="row justify-content-center container" id="cardSection">
         <!-- col -->
         <div class="col-lg-7 col-md-8">
             <!-- cards -->

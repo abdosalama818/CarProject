@@ -10,7 +10,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="slider-text">
+                                <div class="slider-text text-right-rtl">
                                     <p>for rent $65 per day</p>
                                     <h2>Reserved Now & Get <span>50% Off</span></h2>
                                     <a href="#" class="elgazal-btn">Reserve Now!</a>
@@ -27,7 +27,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="slider-text">
+                                <div class="slider-text text-right-rtl">
                                     <p>for rent $70 per day</p>
                                     <h2>Reserved Now & Get <span>50% Off</span></h2>
                                     <a href="#" class="elgazal-btn">Reserve Now!</a>
@@ -50,7 +50,70 @@
             <div class="col-md-12">
                 <div class="find-box">
                     <div class="row">
+                        @if (App::getLocale() == 'ar')
+                        <div class="col-md-8">
+
+                            <div class="find-form">
+
+                                 <form action="{{ route('car.search') }}" method="get">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>
+                                                <input type="text" placeholder="Car Name" name='name'/>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select name='cat'>
+                                                    <option>Car Category</option>
+
+                                                    @foreach ($cats as $cat )
+                                                          <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select name='model'>
+                                                    <option>Car Model</option>
+
+                                                   @foreach ($models as $model )
+                                                          <option value="{{$model->id}}">{{$model->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p>
+                                                <select>
+                                                    <option name='brand'>Car Brand</option>
+
+                                                   @foreach ($brands as $brand )
+                                                          <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <p>
+                                                <button type="submit" class="elgazal-theme-btn">Find Car</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                         <div class="col-md-4">
+                            <div class="find-text">
+                                <h3>Search Your Best Cars here.</h3>
+                            </div>
+                        </div>
+                        @else
+                            <div class="col-md-4">
                             <div class="find-text">
                                 <h3>Search Your Best Cars here.</h3>
                             </div>
@@ -111,6 +174,7 @@
                                 </form>
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -166,7 +230,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="promo-box-left">
-                    <img src="{{asset('assetscar/img/toyota-offer-2.pngg')}}" alt="promo car"/>
+                    <img src="{{asset('assetscar/img/toyota-offer-2.png')}}" alt="promo car"/>
                 </div>
             </div>
             <div class="col-md-6">
@@ -213,168 +277,48 @@
                     </ul>
                     <div class="tab-content" id="offerTabContent">
                         <!-- All Tab Start -->
-                        <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
+                        <div class="tab-pane fade " id="all" role="tabpanel" aria-labelledby="all-tab">
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/offer-toyota.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>Toyota Alphard</h3>
-                                            </a>
-                                            <h4>$50.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
+                                @foreach ($cars as $car )
+
+                                        <div class="col-lg-4">
+                                            <div class="single-offers">
+                                                <div class="offer-image">
+                                                    <a href="{{ route("car.details",$car->id) }}">
+                                                        <img src="{{asset("uploads/$car->img")}}" alt="offer 1"/>
+                                                    </a>
+                                                </div>
+                                                <div class="offer-text">
+                                                    <a href="{{ route("car.details",$car->id) }}">
+                                                        <h3>{{$car->name}}</h3>
+                                                    </a>
+                                                    <h4>{{$car->price}}<span>/ Day</span></h4>
+                                                    <ul>
+                                                        <li><i class="fa fa-car"></i>{{$car->modelcar->name}}</li>
+                                                        <li><i class="fa fa-cogs"></i>{{$car->type}}</li>
+                                                        <li><i class="fa fa-dashboard"></i>20kmpl</li>
+                                                    </ul>
+                                                    <div class="offer-action">
+                                                        <a href="{{ route('car.reserve',$car->id) }}" class="offer-btn-1">Rent Car</a>
+                                                        <a href="{{ route("car.details",$car->id) }}" class="offer-btn-2">Details</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/nissan-offer.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>Nissan 370Z</h3>
-                                            </a>
-                                            <h4>$75.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/audi-offer.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>Audi Q3</h3>
-                                            </a>
-                                            <h4>$45.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/bmw-offer.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>BMW X3</h3>
-                                            </a>
-                                            <h4>$50.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/audi-offer.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>Audi Q3</h3>
-                                            </a>
-                                            <h4>$75.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/toyota-offer-2.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>Toyota Camry</h3>
-                                            </a>
-                                            <h4>$55.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                     @endforeach
                             </div>
                         </div>
                         <!-- All Tab End -->
 
                         <!-- Nissan Tab Start -->
-                        <div class="tab-pane fade" id="nissan" role="tabpanel" aria-labelledby="nissan-tab">
+                        <div class="tab-pane fade show active" id="nissan" role="tabpanel" aria-labelledby="nissan-tab">
                             <div class="row">
                             @foreach ($brands as $brand )
                                     @foreach ($brand->cars as $car )
-
                                         <div class="col-lg-4">
                                             <div class="single-offers">
                                                 <div class="offer-image">
-                                                    <a href="#">
+                                                    <a href="{{ route("car.details",$car->id) }}">
                                                         <img src="{{asset("uploads/$car->img")}}" alt="offer 1"/>
                                                     </a>
                                                 </div>
@@ -398,55 +342,6 @@
                                      @endforeach
 
                             @endforeach
-
-{{--                                 <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/audi-offer.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>Audi Q3</h3>
-                                            </a>
-                                            <h4>$75.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="single-offers">
-                                        <div class="offer-image">
-                                            <a href="#">
-                                                <img src="{{asset('assetscar/img/toyota-offer-2.png')}}" alt="offer 1"/>
-                                            </a>
-                                        </div>
-                                        <div class="offer-text">
-                                            <a href="#">
-                                                <h3>Toyota Camry</h3>
-                                            </a>
-                                            <h4>$55.00<span>/ Day</span></h4>
-                                            <ul>
-                                                <li><i class="fa fa-car"></i>Model:2017</li>
-                                                <li><i class="fa fa-cogs"></i>Automatic</li>
-                                                <li><i class="fa fa-dashboard"></i>20kmpl</li>
-                                            </ul>
-                                            <div class="offer-action">
-                                                <a href="#" class="offer-btn-1">Rent Car</a>
-                                                <a href="#" class="offer-btn-2">Details</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
                             </div>
                         </div>
                         <!-- Nissan Tab End -->

@@ -20,7 +20,7 @@
                     <div class="elgazal-responsive-menu"></div>
                     <!-- Responsive Menu Start -->
                     <!-- Search Box Start -->
-                    <div class="search-box">
+                    <div style="direction: ltr !important;" class="search-box">
                           <form action="{{ route('car.search') }}" method="get">
                                     @csrf
                             <input type="search" placeholder="Search" name='name'>

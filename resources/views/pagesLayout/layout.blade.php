@@ -1,5 +1,9 @@
 <!DOCTYPE html>
+@if (App::getLocale() == 'ar')
+<html lang="en-US" class="rtl">
+@else
 <html lang="en-US">
+@endif
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,7 +16,7 @@
 </head>
 <body>
 <!-- Header Top Area Start -->
-<section class="elgazal-header-top-area">
+<section style="direction: ltr" class="elgazal-header-top-area">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
@@ -56,47 +60,29 @@
 
 
 
-
-                    {{--
-
-                       <div class="btn-group mb-1">
-            <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              @if (App::getLocale() == 'ar')
-              {{ LaravelLocalization::getCurrentLocaleName() }}
-             <img src="{{ URL::asset('assets/images/flags/EG.png') }}" alt="">
-              @else
-              {{ LaravelLocalization::getCurrentLocaleName() }}
-              <img src="{{ URL::asset('assets/images/flags/US.png') }}" alt="">
-              @endif
-              </button>
-            <div class="dropdown-menu">
-                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                            {{ $properties['native'] }}
-                        </a>
-                @endforeach
-            </div>
-        </div>
-
-                     --}}
-
-
-
                     <div class="dropdown">
-
-                      {{--   <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
-                                data-toggle="dropdown" aria-haspopup="true"> English
-                        </button> --}}
-
+                        @if (App::getLocale() == 'ar')
+                        <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
+                                data-toggle="dropdown" aria-haspopup="true">
+                            {{ LaravelLocalization::getCurrentLocaleName() }} 
+                        </button>
+                        @else
+                        <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
+                                data-toggle="dropdown" aria-haspopup="true">
+                            {{ LaravelLocalization::getCurrentLocaleName() }}
+                        </button>
+                        @endif
+                        <ul class="dropdown-menu" aria-labelledby="dropdownlang">
                             @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-
-                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
-                            {{ $properties['native'] }}
-                        </a>
-                @endforeach
+                                <li>
+                                    <a style="display:block" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                        {{ $properties['native'] }}
+                                    </a>
+                                </li>
+                            @endforeach
+                            
+                        </ul>
                     </div>
-
-
                 </div>
             </div>
         </div>

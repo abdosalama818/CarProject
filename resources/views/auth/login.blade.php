@@ -1,4 +1,5 @@
 {{-- @extends('pagesLayout.layout')
+@section('content')
 
 @section('content')
 <div class="container">
@@ -59,7 +60,7 @@
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        {{ __('Forgot Your Passworoooood?') }}
                                     </a>
                                 @endif
                             </div>

@@ -10,6 +10,7 @@ use Livewire\Component;
 use App\Models\Discount;
 use App\Models\Bigdiscount;
 use App\Events\SendEmailEvents;
+use App\Models\Branche;
 use App\Models\Personalinformation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -66,7 +67,7 @@ class Reserve extends Component
             'cvcpwd' => 'required',
 
             'branch' => 'required',
-            'place' => 'required',
+        /*     'place' => 'required', */
             'Address' => 'required',
 
              'card_name' => 'required',
@@ -191,7 +192,7 @@ foreach($big_discount as $dis){
     public function secondSubmit(){
        $validatedData = $this->validate([
             'branch' => 'required',
-            'place' => 'required',
+          /*   'place' => 'required', */
             'Address' => 'required',
         ]);
         $this->currentStep=3;
@@ -216,7 +217,7 @@ foreach($big_discount as $dis){
         if($personal){
             $personal->update([
                 'ID_Number' => $this->ID_Number,
-                'Birthday' => $this->Birthday,
+
                 'ID_Name' => $this->ID_Name,
                 'Job' => $this->Job,
                 'Expiry_Date' => $this->Expiry_Date,
@@ -238,7 +239,7 @@ foreach($big_discount as $dis){
         }
         Personalinformation::create([
             'ID_Number' => $this->ID_Number,
-            'Birthday' => $this->Birthday,
+
             'ID_Name' => $this->ID_Name,
             'Job' => $this->Job,
             'Expiry_Date' => $this->Expiry_Date,
@@ -268,8 +269,10 @@ foreach($big_discount as $dis){
 
     public function render()
     { $car = Car::where('id',intval($this->car))->first();
+        $branches = Branche::all();
         return view('livewire.reserve',[
-            'car'=> $car
+            'car'=> $car,
+            'branches'=> $branches,
         ]);
     }
 }

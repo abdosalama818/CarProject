@@ -88,23 +88,15 @@
                     </div>
                     <p>{{$car->desc}}</p>
                     <div class="car-features clearfix">
-                        <ul>
+                        <ul style="width:50% !important">
                             <li><i class="fa fa-car"></i> Model: {{$car->modelcar->name}}</li>
-                            <li><i class="fa fa-cogs"></i> {{$car->type}}</li>
-                            <li><i class="fa fa-dashboard"></i> 20kmpl</li>
-                            <li><i class="fa fa-empire"></i> V-6 Cylinder</li>
+                            <li><i class="fa fa-cogs"></i>Type: {{$car->type}}</li>
+                            <li><i class="fa fa-dashboard"></i>Seats Number: {{$car->seats}}</li>
                         </ul>
-                        <ul>
-                            <li><i class="fa fa-eye"></i> GPS Navigation</li>
-                            <li><i class="fa fa-lock"></i> Anti-Lock Brakes</li>
-                            <li><i class="fa fa-key"></i> Remote Keyless</li>
-                            <li><i class="fa fa-desktop"></i> Rear-Seat DVD</li>
-                        </ul>
-                        <ul>
+                        <ul style="width:50% !important">
                             <li><i class="fa fa-car"></i> Category: {{$car->cat->name}}</li>
                             <li><i class="fa fa-cogs"></i> Color: {{$car->color}}</li>
-                            <li><i class="fa fa-dashboard"></i>Seats Number: {{$car->seatts}}</li>
-                            <li><i class="fa fa-empire"></i>Lime type: Test</li>
+                            
                         </ul>
                     </div>
                 </div>
