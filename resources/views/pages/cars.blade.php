@@ -39,7 +39,7 @@
                             <p>
                                 <select name='cat'>
                                                     <option>Car Category</option>
-                                                   
+
                                                     @foreach ($cats as $cat )
                                                           <option value="{{$cat->id}}">{{$cat->name}}</option>
                                                     @endforeach
@@ -48,7 +48,7 @@
                             <p>
                              <select name='model'>
                                                     <option>Car Model</option>
-                                                    
+
                                                    @foreach ($models as $model )
                                                           <option value="{{$model->id}}">{{$model->name}}</option>
                                                     @endforeach
@@ -57,7 +57,7 @@
                             <p>
                                   <select>
                                                     <option name='brand'>Car Brand</option>
-                                                    
+
                                                    @foreach ($brands as $brand )
                                                           <option value="{{$brand->id}}">{{$brand->name}}</option>
                                                     @endforeach
@@ -80,16 +80,16 @@
                             @foreach ($brands as $brand )
                                   <li>
                                 <a href="{{route('fleats.brand',$brand->id)}}">{{$brand->name}}<span>
-                          
+
                                    ({{$brand->cars->count()}})
-                                   
-                              
-                                
+
+
+
                                 </span></a>
                             </li>
                             @endforeach
-                          
-                      
+
+
                         </ul>
                     </div>
                     <div class="sidebar-widget display">
@@ -101,7 +101,7 @@
                                   <li>
                                 <a href="{{route('fleats.cat',$cat->id)}}">{{$cat->name}}<span>
                                  ({{$cat->cars->count()}})
-                                
+
                                 </span></a>
                             </li>
                             @endforeach
@@ -116,7 +116,7 @@
                                   <li>
                                 <a href="{{route('fleats.model',$model->id)}}">{{$model->name}}<span>
                                ({{$model->cars->count()}})
-                                
+
                                 </span></a>
                             </li>
                             @endforeach
@@ -155,25 +155,36 @@
                                         <a href="#">
                                             <h3>  {{$car->name}} </h3>
                                         </a>
-                                        <h4>${{$car->price}} <span> Day </span></h4>
+                                        <h4>${{$car->price}} <span> price_per Day </span></h4>
+                                        <h6>${{$car->price_delivery}} <span> price_delivery </span></h6>
+                                        <h6>${{$car->price_insurance}} <span> price_insurance </span></h6>
                                         <ul>
                                             <li><i class="fa fa-car"></i>Model:{{$car->modelcar->name}}</li>
                                             <li><i class="fa fa-cogs"></i>Automatic</li>
                                             <li><i class="fa fa-dashboard"></i>20kmpl</li>
                                         </ul>
                                         <div class="offer-action">
-                                            <a href="{{route('car.reserve',$car->id)}}" class="offer-btn-1">Rent Car</a>
+                                            @if ($car->stock == 0)
+
+                                            <a href=""  style="pointer-events: none" class="offer-btn-1">No Car </a>
+
+                                           @else
+                                           <a href="{{route('car.reserve',$car->id)}}" class="offer-btn-1">Rent Car</a>
+                                           @endif
+
+
+
                                             <a href="{{route('car.details',$car->id)}}" class="offer-btn-2">Details</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach   {{-- foreach loop end --}}
-                          
+
                         </div>
-                  
+
                     </div>
-                           {{ $cars->links() }} 
+                           {{ $cars->links() }}
                 {{--     <div class="pagination-box-row">
                         <p>Page 1 of 6</p>
                         <ul class="pagination">

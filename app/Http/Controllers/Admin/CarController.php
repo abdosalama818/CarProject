@@ -20,33 +20,34 @@ class CarController extends Controller
     public $carInterface ;
     public function __construct(CarInterface $carInterface)
     {
-       return $this->carInterface =$carInterface ;  
+       return $this->carInterface =$carInterface ;
     }
 
     public function index()
     {
 
         $cars = $this->getAllData(new Car());
-    
+
         $models = $this->getAllData(new ModelCar());
         $cats = $this->getAllData(new Cat());
         $brands = $this->getAllData(new Brand());
-       
+
         return view('admin.cars')->with(compact('cars','models','cats','brands'));
     }
 
 
 
-   
+
     public function store(Request $request)
-    { 
+    {
 
         DB::beginTransaction();
 
 
+
         try{
             //$validated = $request->validated();
-      
+
         $this->carInterface->store($request);
         return back();
        } catch (\Exception $e){
@@ -60,45 +61,45 @@ class CarController extends Controller
 
     }
 
-  
 
-    
+
+
     public function update(Request $request, $id)
     {
 
-     
-        
+
+
 
         try{
            // $validated = $request->validated();
             $car = $this->getDataById(new Car(),$id);
-        
+
            $this->carInterface->update($request,$car);
             return back();
            } catch (\Exception $e){
-  
+
             return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
            }
-    
-    
+
+
          return back() ;
     }
 
-   
+
     public function delete($id)
     {
-       
+
         try{
-           
+
             $model = $this->getDataById(new Car(),$id);
-           
+
             $this->carInterface->delete($model);
             return back();
            } catch (\Exception $e){
             return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
            }
-    
-    
-        
+
+
+
     }
 }

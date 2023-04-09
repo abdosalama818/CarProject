@@ -25,7 +25,51 @@
 <section class="elgazal-car-booking section_70">
     <div class="container">
         <div class="row">
+
             <div class="col-lg-6">
+                <div class="car-booking-image">
+                   <div class = "card">
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+
+                          <div class="carousel-item active">
+                            <img class="d-block w-100"src = '{{asset("uploads/$car->img")}}'alt="First slide">
+                          </div>
+
+
+                          @foreach ($car->images as $img )
+
+                          <div class="carousel-item">
+
+                                <img class="d-block w-100" src = "{{asset("uploads/$img->filename")}}" alt = "Car Image">
+
+                          </div>
+                          @endforeach
+
+
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+
+                        </a>
+                      </div>
+                   </div>
+                   @foreach ($car->images as $img )
+
+                   <div class = "img-item col-md-3 w-25 d-inline-block">
+                      <a href = "#" data-id = "1">
+                         <img src = "{{asset("uploads/$img->filename")}}" alt = "Car Image">
+                      </a>
+                   </div>
+                   @endforeach
+                </div>
+            </div>
+         {{--    <div class="col-lg-6">
                 <div class="car-booking-image">
                    <div class = "card">
                       <!-- card left -->
@@ -33,12 +77,12 @@
                          <div style="height: 280px;" class = "img-display">
                             <div class = "img-showcase">
                                <img src = '{{asset("uploads/$car->img")}}' alt = "Car image">
-                            
+
                             </div>
                          </div>
                          <div class = "img-select">
                             @foreach ($car->images as $img )
-                                
+
                             <div class = "img-item">
                                <a href = "#" data-id = "1">
                                   <img src = "{{asset("uploads/$img->filename")}}" alt = "Car Image">
@@ -46,7 +90,7 @@
                             </div>
                             @endforeach
 
-                        {{--     <div class = "img-item">
+                         <div class = "img-item">
                                <a href = "#" data-id = "2">
                                    <img src = "assets/img/marcedes-offer.png" alt = "Car image">
                                </a>
@@ -60,13 +104,13 @@
                                <a href = "#" data-id = "4">
                                    <img src = "assets/img/marcedes-offer.png" alt = "Car image">
                                </a>
-                            </div> --}}
+                            </div>
 
                          </div>
                       </div>
                    </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-lg-6">
                 <div class="car-booking-right">
                     <p class="rental-tag">rental</p>
@@ -96,7 +140,12 @@
                         <ul style="width:50% !important">
                             <li><i class="fa fa-car"></i> Category: {{$car->cat->name}}</li>
                             <li><i class="fa fa-cogs"></i> Color: {{$car->color}}</li>
-                            
+                            <li><i class="fa fa-cogs"></i> Pice Per Day: {{$car->price}}</li>
+                            <li><i class="fa fa-cogs"></i> price Delivery: {{$car->price_delivery}}</li>
+                            <li><i class="fa fa-cogs"></i> price Insurance: {{$car->price_insurance}}</li>
+                            <li><i class="fa fa-cogs"></i> price total: {{$car->total_price}}</li>
+
+
                         </ul>
                     </div>
                 </div>

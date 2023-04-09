@@ -19,8 +19,10 @@ return new class extends Migration
 
             $table->text('ID_Number')->nullable();
             $table->text('ID_Name')->nullable();
-  
+
             $table->text('Expiry_Date')->nullable();
+            $table->text('Birthday')->nullable();
+
             $table->text('Work_Address')->nullable();
             $table->text('Home_Address')->nullable();
             $table->text('Job')->nullable();

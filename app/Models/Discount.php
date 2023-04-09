@@ -13,12 +13,12 @@ class Discount extends Model
     public $translatable = ['name'];
     protected $guarded = [];
 
-   
+
 
     //
 
-    public function car(){
-        return $this->belongsTo(Car::class,'car_id');
+    public function cars(){
+        return $this->hasMany(Car::class,'discount_id');
     }
 
 

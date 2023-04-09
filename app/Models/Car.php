@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Car extends Model
 {
     use HasFactory,HasTranslations;
-  
+
     public $translatable = ['name','desc','color','seats','type'];
     protected $guarded = [];
 
 
 
-    //car belogs to model a, barnd , cat 
+    //car belogs to model a, barnd , cat
 
     public function cat(){
         return $this->belongsTo(Cat::class);
@@ -44,10 +44,10 @@ class Car extends Model
     }
 
     public function discount(){
-        return $this->hasOne(Discount::class,'car_id');
+        return $this->belongsTo(Discount::class,'discount_id');
     }
 
 
-   
- 
+
+
 }

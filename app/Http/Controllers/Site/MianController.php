@@ -31,7 +31,7 @@ class MianController extends Controller
     public function index()
     {
 
-       
+
         //return Session::get('variableName');
 
 
@@ -85,24 +85,16 @@ class MianController extends Controller
     public function deals()
     {
 
-        $cars = Discount::with('car')->orderBy('id')->paginate(6);
-        $cars_Cat = Bigdiscount::with(['cat','model','brand'])->orderBy('id')->paginate(6);
+      // return $cars = Car::whereNotNull('discount_id')->paginate(6);
+        $cars = Car::with('discount')->whereNotNull('discount_id')->get();
+
         $cats = Cat::with('discount')->get();
         $models = ModelCar::with('discount')->get();
        $brands = Brand::with('discount')->get();
 
 
 
-        if($cars_Cat->isEmpty()){
-            $cars_Cat = [] ;
-
-            return view('pages.deals')->with(compact('cats','models','brands','cars','cars_Cat'));
-
-
-        }
-
-
-       return view('pages.deals')->with(compact('cats','models','brands','cars','cars_Cat'));
+       return view('pages.deals')->with(compact('cats','models','brands','cars'));
     }
 
 

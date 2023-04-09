@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Session;
 class Reserve extends Component
 {
     public $currentStep = 1;
-    public $ID_Number,$ID_Name,$Birthday,$Expiry_Date,$Job,
+    public $ID_Number,$ID_Name,$Birthday,$Expiry_Date,$Job,$start_date,
     $Work_Address,$Home_Address;
 
 
@@ -83,80 +83,70 @@ class Reserve extends Component
 
 
     public function firstSubmit(){
-       $validatedData = $this->validate([
+     /*    $validatedData = $this->validate([
             'ID_Number' => 'required',
             'Birthday' => 'required',
             'ID_Name' => 'required',
             'Job' => 'required',
-            'Expiry_Date' => 'required',
             'Home_Address' => 'required',
             'Work_Address' => 'required',
         ]);
+ */
 
-$big_discount = Bigdiscount::all();
-$car = Car::where('id',intval($this->car))->first();
+        $this->currentStep=2;
 
-$discount = Discount::where('car_id',intval($this->car))->first();
+
+    }
+
+    public function secondSubmit(){
+     /*   $validatedData = $this->validate([
+            'branch' => 'required',
+           'start_date' => 'required',
+            'Expiry_Date' => 'required',
+
+           'place' => 'required',
+            'Address' => 'required',
+        ]); */
+
+
+
+
+$car = Car::with('discount')->where('id',intval($this->car))->whereNotNull('discount_id')->first();
+$discount = Discount::where('id',$car->discount_id)->first();
+
+
+
 $price =$car->price;
 $name = $car->name ;
-if($discount ){
+if($car){
     $discount_number = $discount->discount_number;
-    if($discount->discount_number !=0){
+    if($discount->discount_number !=0 && $discount->discount_type =='precent'){
 
-        $price = $discount->car->price - ($discount->discount_value / 100) * $discount->car->price ;
+        $price = $car->price - ($discount->discount_value / 100) * $car->price ;
         $discount->update([
             'discount_number'=>  --$discount_number ,
         ]);
     }else{
 
-        if($discount->discount_number !=0){
-        $price = $discount->car->price - $discount->discount_value ;
-        $discount->update([
-            'discount_number'=>  --$discount_number ,
-        ]);
-    }
-    }
-}
-
-
-
-foreach($big_discount as $dis){
-    $car = Car::where('id',intval($this->car))->first();
-
-
-    $price = $car->price;
-    $discount_number = $dis->discount_number;
-
-
-    if(($car->cat_id == $dis->cat_id || $car->model_car_id == $dis->model_car_id ||$car->brand_id == $dis->brand_id ) && $dis->discount_type =='precent' ){
-        if($dis->discount_number !=0){
-            $price = $car->price - ($dis->discount_value / 100) * $car->price ;
-            $dis->update([
+            if($discount->discount_number !=0 && $discount->discount_type =='flat'){
+            $price = $discount->car->price - $discount->discount_value ;
+            $discount->update([
                 'discount_number'=>  --$discount_number ,
             ]);
         }
-
-
-    }else{
-
-        if($dis->discount_number !=0){
-        $price = $car->price - $dis->discount_value ;
-        $dis->update([
-            'discount_number'=>  --$discount_number ,
-        ]);
     }
-    }
-
-
-
 }
+
+
+
+
 
 
 
 
 
       $expire_date = $this->Expiry_Date;
-      $current_date =$this->Birthday;
+      $current_date =$this->start_date;
       $time1=strtotime($expire_date);
       $time2=strtotime($current_date);
       $time=$time1 - $time2;
@@ -169,7 +159,7 @@ foreach($big_discount as $dis){
             'user_id'=>Auth::id(),
             'name'=>$car->name,
             'price'=>$price,
-            'start_date'=>$this->Birthday,
+            'start_date'=>$this->start_date,
             'exp_date'=>$this->Expiry_Date,
             'total_price'=>$price * $days,
             'number_days'=>$days,
@@ -184,17 +174,7 @@ foreach($big_discount as $dis){
         Session::put('Subtotal1', $price);
         Session::put('total1', $price * $days);
 
-        $this->currentStep=2;
 
-
-    }
-
-    public function secondSubmit(){
-       $validatedData = $this->validate([
-            'branch' => 'required',
-          /*   'place' => 'required', */
-            'Address' => 'required',
-        ]);
         $this->currentStep=3;
 
     }
@@ -221,6 +201,7 @@ foreach($big_discount as $dis){
                 'ID_Name' => $this->ID_Name,
                 'Job' => $this->Job,
                 'Expiry_Date' => $this->Expiry_Date,
+                'Birthday' => $this->Birthday,
                 'Home_Address' => $this->Home_Address,
                 'Work_Address' => $this->Work_Address,
 
@@ -270,6 +251,8 @@ foreach($big_discount as $dis){
     public function render()
     { $car = Car::where('id',intval($this->car))->first();
         $branches = Branche::all();
+        $branches = Branche::all();
+
         return view('livewire.reserve',[
             'car'=> $car,
             'branches'=> $branches,

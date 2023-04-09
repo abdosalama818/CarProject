@@ -17,7 +17,7 @@ class CarRepository implements CarInterface
   public function store($request)
   {
 
-
+    $total_price = $request->price + $request->price_delivery + $request->price_insurance;
     $imagepath = Storage::putFile('cars', $request->img);
 
     $car = Car::create([
@@ -49,6 +49,12 @@ class CarRepository implements CarInterface
       ],
 
       'price' => $request->price,
+
+      'price_delivery' => $request->price_delivery,
+      'price_insurance' => $request->price_insurance,
+      'total_price'=> $total_price,
+      'stock' => $request->stock,
+
       'cat_id' => $request->cat_id,
       'brand_id' => $request->brand_id,
       'model_car_id' => $request->model_id,
@@ -75,8 +81,9 @@ class CarRepository implements CarInterface
 
   public function update($request, $car)
   {
+    $total_price = $request->price + $request->price_delivery + $request->price_insurance;
 
-  
+
     $imgPath = $car->img;
     if ($request->hasFile('img')) {
       Storage::delete($imgPath);
@@ -114,6 +121,12 @@ class CarRepository implements CarInterface
       ],
 
       'price' => $request->price,
+
+      'price_delivery' => $request->price_delivery,
+      'price_insurance' => $request->price_insurance,
+      'stock' => $request->stock,
+      'total_price'=> $total_price,
+
       'cat_id' => $request->cat_id,
       'brand_id' => $request->brand_id,
       'model_car_id' => $request->model_id,
@@ -125,21 +138,21 @@ class CarRepository implements CarInterface
     if ($request->hasFile('imgs')) {
             foreach ($images as $photo) {
               $imgPath2 = $photo->filename;
-              Storage::delete($imgPath2); 
+              Storage::delete($imgPath2);
             }
 
             foreach ($request->file('imgs') as $file) {
               $imagepath2 = Storage::putFile('cars', $file);
-      
+
               $images = new Image();
               $images->filename = $imagepath2;
               $images->imageable_id = $car->id;
               $images->imageable_type = 'App\Models\Car';
               $images->save();
-      
 
 
-         
+
+
           }
 
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('name')->nullable();
 
             $table->string('discount_value')->nullable();
-          
+
             $table->enum('discount_type' , ['precent' , 'flat' ])->default('precent')->nullable();
 
             $table->text('discount_start')->nullable();
@@ -29,9 +29,8 @@ return new class extends Migration
             $table->string('discount_days')->nullable();
 
 
-            
-            
-            $table->foreignId('car_id')->constrained('cars')->onDelete('cascade')->onUpdate('cascade')->nullable();
+
+
 
 
             $table->timestamps();

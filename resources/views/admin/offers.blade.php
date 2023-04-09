@@ -38,7 +38,7 @@
                                                         <input class="form-control" placeholder="name" name='name_en'>
                                                     </div>
 
-                                
+
 
 
                                                   <div style="text-align: left" class="mb-3">
@@ -47,9 +47,9 @@
                                                             <option value="">Cat Name</option>
                                                             @foreach ($cats as $cat )
                                                             <option value="{{$cat->id}}"> {{$cat->name}} </option>
-                                                                
+
                                                             @endforeach
-                                                          
+
                                                         </select>
                                                     </div>
 
@@ -59,9 +59,9 @@
                                                             <option value="">Brand Name</option>
                                                             @foreach ($brands as $brand )
                                                             <option value="{{$brand->id}}"> {{$brand->name}} </option>
-                                                                
+
                                                             @endforeach
-                                                          
+
                                                         </select>
                                                     </div>
 
@@ -72,14 +72,14 @@
                                                             <option value="">Model Name</option>
                                                             @foreach ($models as $model )
                                                             <option value="{{$model->id}}"> {{$model->name}} </option>
-                                                                
+
                                                             @endforeach
-                                                          
+
                                                         </select>
                                                     </div>
 
 
-                                                    
+
 
                                                  <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Offer In</label>
@@ -134,6 +134,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Offer Name</th>
                                         <th scope="col">Offer On</th>
+                                        <th scope="col">Coupon</th>
                                         <th scope="col">Offer Value</th>
                                         <th scope="col">Offer In</th>
                                         <th scope="col">Offer From</th>
@@ -142,35 +143,59 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
+
                                     <?php $i = 0 ; ?>
 
-                                      
-                                       
-                                       
+
+
+
                                     @foreach ($big_discount as $discount)
+                                    <?php
+                                    $discount_end=strtotime($discount->discount_end);
+
+                                    $discount_end_date=  date("Y-m-d H:i:s",  $discount_end); ;
+                                 ?>
+                               @if ($discount_end_date < now())
+
+
+
+                               {{  $discount->delete() }}
+
+
+
+
+                                   @endif
+
+
+
+
+
+
                                           <?php $i++; ?>
-                                        
+
                                     <tr>
-                                  
+
                                            <td>{{ $i }}</td>
                                         <td>{{$discount->name}}</td>
                                         @if ($discount->cat )
                                          <td>{{$discount->cat->name}}</td>
-                                      
-                                     
+
+
 
                                         @elseif ($discount->brand)
                                          <td>{{$discount->brand->name}}</td>
-                                      
-                                     
+
+
 
                                           @elseif ($discount->model)
                                          <td>{{$discount->model->name}}</td>
-                                      
+
                                         @endif
-                                        
-                                        
-                                     
+
+
+                                        <td>{{$discount->coupon}}</td>
+
                                     @if ($discount->discount_type == 'precent')
                                         <td>{{$discount->discount_value}}%</td>
                                            @else
@@ -179,7 +204,7 @@
                                         @endif
                                         <td>{{$discount->discount_number}}</td>
                                         <td>{{$discount->discount_start}}</td>
-                                        <td>{{$discount->discount_end}}</td> 
+                                        <td>{{$discount->discount_end}}</td>
                                         <td>
                                             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg-x">Edit</button>
                                             <div class="modal fade bd-example-modal-lg-x" tabindex="-1" role="dialog" aria-hidden="true">
@@ -287,23 +312,23 @@
                                                         <input class="form-control" placeholder="name" name='name_en'>
                                                     </div>
 
-                                
+
 
 
                                                   <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Offer By car </label>
-                                                        <select class="form-control"  name='car_id'>
-                                                            <option value="">car Name</option>
+                                                        <select class="form-control"  name='car_id[]' multiple>
+                                                            <option value="">Select car Name</option>
                                                             @foreach ($cars as $car )
                                                             <option value="{{$car->id}}"> {{$car->name}} </option>
-                                                                
+
                                                             @endforeach
-                                                          
+
                                                         </select>
                                                     </div>
 
-                                                  
-                                                    
+
+
 
                                                  <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Offer In</label>
@@ -342,7 +367,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
                 <!-- Container-fluid starts-->
             <div class="container-fluid default-dash">
@@ -359,7 +384,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Offer Name</th>
-                                        <th scope="col">Offer By</th>
+
                                         <th scope="col">Offer Value</th>
                                         <th scope="col">Offer In</th>
                                         <th scope="col">Offer From</th>
@@ -370,31 +395,46 @@
                                     <tbody>
                                     <?php $i = 0 ; ?>
 
-                                      
-                                       
-                                 
-                                    @foreach ($discounts as $discount_car)
-                                        
-                                    <tr>    
+
+
+
+                                    @foreach ($cars_discount as $car_dis)
+                                    <?php
+                                           $discount_end=strtotime($car_dis->discount_end);
+
+                                           $discount_end_date=  date("Y-m-d H:i:s",  $discount_end); ;
+                                        ?>
+                                      @if ($discount_end_date < now())
+
+
+
+                                      {{  $car_dis->delete() }}
+
+
+
+
+                                          @endif
+
+
+                                    <tr>
                                         <?php $i++; ?>
                                            <td>{{ $i }}</td>
-                                           
-                                      
-                                        <td>{{ $discount_car->name }}</td>
-                                        <td>{{ $discount_car->car->name }}</td>
-                                        @if ($discount_car->discount_type == 'precent')
-                                        <td>{{$discount_car->discount_value}}%</td>
-                                           @else
-                                        <td>{{$discount_car->discount_value}}</td>
 
-                                        @endif
+                                           <td>{{ $car_dis->name }}</td>
+                                           @if ($car_dis->discount_type == 'precent')
+                                           <td>{{$car_dis->discount_value}}%</td>
+                                              @else
+                                           <td>{{$car_dis->discount_value}}</td>
 
-                                       <td>{{$discount_car->discount_number}}</td>
-                                        <td>{{$discount_car->discount_start}}</td>
-                                        <td>{{$discount_car->discount_end}}</td> 
+                                           @endif
+
+                                           <td>{{$car_dis->discount_number}}</td>
+                                           <td>{{$car_dis->discount_start}}</td>
+                                           <td>{{$car_dis->discount_end}}</td>
+
                                         <td>
-                                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg-x">Edit</button>
-                                            <div class="modal fade bd-example-modal-lg-x" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target=".bd-example-modal-lg-{{$car_dis->id}}">Edit</button>
+                                            <div class="modal fade bd-example-modal-lg-{{$car_dis->id}}" tabindex="-1" role="dialog" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
@@ -402,46 +442,60 @@
                                                                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                <form>
+                                                                <form action="{{ route('Discounts.update', $car_dis->id) }}" method="post">
+                                                                    @csrf
+                                                                    @method('PUT')
                                                                     <div style="text-align: left" class="mb-3">
-                                                                        <label class="form-label">Name</label>
-                                                                        <input class="form-control" placeholder="name">
+                                                                        <label class="form-label">Name ar</label>
+                                                                        <input class="form-control" value="{{ $car_dis->getTranslation('name', 'ar') }}" placeholder="name" name='name_ar'>
                                                                     </div>
+
                                                                     <div style="text-align: left" class="mb-3">
-                                                                        <label class="form-label">Offer By</label>
-                                                                        <select class="form-control">
-                                                                            <option>Car Name</option>
-                                                                            <option>Car Brand</option>
-                                                                            <option>Car Category</option>
-                                                                            <option>Car Model</option>
+                                                                        <label class="form-label">Name en</label>
+                                                                        <input class="form-control" placeholder="name" value="{{ $car_dis->getTranslation('name', 'en') }}" name='name_en'>
+                                                                    </div>
+
+
+
+
+                                                                  <div style="text-align: left" class="mb-3">
+                                                                        <label class="form-label">Offer By car </label>
+                                                                        <select class="form-control"  name='car_id[]' multiple>
+                                                                            <option value="">Select car Name</option>
+                                                                            @foreach ($cars as $car )
+                                                                            <option value="{{$car->id}}"> {{$car->name}} </option>
+
+                                                                            @endforeach
+
                                                                         </select>
                                                                     </div>
-                                                                    <div style="text-align: left" class="mb-3">
+
+
+
+
+                                                                 <div style="text-align: left" class="mb-3">
                                                                         <label class="form-label">Offer In</label>
-                                                                        <select class="form-control">
-                                                                            <option>One</option>
-                                                                            <option>Two</option>
-                                                                            <option>Three</option>
-                                                                        </select>
+                                                                        <input class="form-control"value="{{ $car_dis->discount_number }}"  name='discount_number' type='number' placeholder="Offer Value">
                                                                     </div>
+
                                                                     <div style="text-align: left" class="mb-3">
                                                                         <label class="form-label">Offer Value</label>
-                                                                        <input class="form-control" placeholder="Offer Value">
+                                                                        <input class="form-control" value="{{ $car_dis->discount_value }}" placeholder="Offer Value"  name='discount_value'>
                                                                     </div>
                                                                     <div style="text-align: left" class="mb-3">
                                                                         <label class="form-label">Offer Type</label>
-                                                                        <select class="form-control">
-                                                                            <option>Precent</option>
-                                                                            <option>Flat</option>
+                                                                        <select class="form-control" name='discount_type' value="{{ $car_dis->discount_type }}">
+                                                                            <option value='precent'>Precent</option>
+                                                                            <option value='flat'>Flat</option>
                                                                         </select>
                                                                     </div>
                                                                     <div style="text-align: left" class="mb-3">
                                                                         <label class="form-label">Offer From</label>
-                                                                        <input class="form-control" type="datetime-local">
+                                                                        <input class="form-control" type="datetime-local"  name='discount_start' value="{{ $car_dis->discount_start }}">
                                                                     </div>
                                                                     <div style="text-align: left" class="mb-3">
                                                                         <label class="form-label">Offer To</label>
-                                                                        <input class="form-control" type="datetime-local">
+                                                                        <input class="form-control" type="datetime-local"  name='discount_end' value="{{ $car_dis->discount_end }}">
                                                                     </div>
                                                                     <div class="form-footer">
                                                                         <button class="btn btn-primary btn-block">Save</button>

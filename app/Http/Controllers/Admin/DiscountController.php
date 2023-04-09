@@ -24,57 +24,55 @@ class DiscountController extends Controller
  public  $discountInterface ;
  public function __construct(DiscountInterface $discountInterface)
  {
-     return $this->discountInterface =$discountInterface ;  
-    
+     return $this->discountInterface =$discountInterface ;
+
  }
 
 
     public function index()
-    {  
+    {
 
+        $cars_discount = Discount::with('cars')->get();
 
-        
         $discounts = $this->getAllData(new Discount());
-      
-       
 
+
+
+        $cars = $this->getAllData(new Car());
 
         $cats = $this->getAllData(new Cat());
-        $cars = $this->getAllData(new Car());
+
         $models = $this->getAllData(new ModelCar());
         $brands = $this->getAllData(new Brand());
 
         $big_discount = Bigdiscount::all();
-       
-        foreach($big_discount as $dis){
-            $cars = Car::where('cat_id','<>',$dis->cat_id)->orWhere('model_car_id','<>',$dis->model_car_id)
-            ->orWhere('brand_id','<>',$dis->brand_id)->get();
-            if($cars){
-                return view('admin.offers')->with(compact('discounts','cars','cats','models','brands','big_discount'));
 
-            }
-        
-       
-        }
-        
-        return view('admin.offers')->with(compact('discounts','cars','cats','models','brands','big_discount'));
-       
-     
+
+
+   return view('admin.offers')->with(compact('cars_discount','discounts','cars','cats','models','brands','big_discount'));
+
+
+
+
+
     }
 
-    
+
     public function create()
     {
         //
     }
 
-  
+
     public function store(Request $request)
     {
-      
-   
+
+
+
+
+
         try{
-           
+
            // $validated = $request->validated();
 
         $this->discountInterface->store($request);
@@ -84,38 +82,28 @@ class DiscountController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, $id)
     {
-        //
+
+
+
+
+        try{
+           // $validated = $request->validated();
+            $discount = $this->getDataById(new Discount(),$id);
+
+           $this->discountInterface->update($request,$discount);
+            return back();
+           } catch (\Exception $e){
+
+            return redirect()->back()->withErrors(['error'=>$e->getMessage()]);
+           }
+
+
+         return back() ;
     }
 
     /**

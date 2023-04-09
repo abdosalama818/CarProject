@@ -1,5 +1,5 @@
 <section style="padding: 20px 1px">
-    <div class="row justify-content-center container" id="cardSection">
+    <div class="row justify-content-center" id="cardSection">
         <!-- col -->
         <div class="col-lg-7 col-md-8">
             <!-- cards -->
@@ -27,24 +27,16 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <p>
-                                <label>start data</label>
-                                <input type="datetime-local" wire:model="Birthday" />
+                                <label>Birth data</label>
+                                <input type="date" wire:model="Birthday" />
                             </p>
                             @error('Birthday')
                                 <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-md-6">
-                            <p>
-                                <label>License Expiry Date</label>
-                                <input type="datetime-local" wire:model="Expiry_Date" />
-                            </p>
-                            @error('Expiry_Date')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
+
                     </div>
                     <div class="row">
                         <div class="col-md-6">

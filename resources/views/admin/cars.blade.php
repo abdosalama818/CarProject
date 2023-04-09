@@ -13,7 +13,7 @@
                             <h3>Dashboard</h3>
                         </div>
 
-         
+
 
 
 
@@ -41,10 +41,10 @@
                                             <div class="modal-body">
                                             <form action="{{ route('Cars.store','test') }}" method="post" autocomplete="off" enctype="multipart/form-data">
                                                                 @csrf
-                                                               
+
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Main Image</label>
-                                                        <input class="form-control" type="file" name='img'>
+                                                        <input class="form-control" type="file" name='img' required>
                                                     </div>
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Internal Images</label>
@@ -53,13 +53,13 @@
 
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Car Name ar</label>
-                                                        <input class="form-control" placeholder="Car name" name='name_ar'>
+                                                        <input class="form-control" placeholder="Car name" name='name_ar' required>
                                                     </div>
 
 
                                                       <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Car Name en</label>
-                                                        <input class="form-control" placeholder="Car name" name='name_en'>
+                                                        <input class="form-control" placeholder="Car name" name='name_en' required>
                                                     </div>
 
 
@@ -68,7 +68,23 @@
 
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Car Price per day</label>
-                                                        <input class="form-control" type="number" placeholder="Car Price per day"  name='price'>
+                                                        <input class="form-control" type="number"required placeholder="Car Price per day"  name='price'>
+                                                    </div>
+
+                                                    <div style="text-align: left" class="mb-3">
+                                                        <label class="form-label">Delivery price for the car</label>
+                                                        <input class="form-control" type="number" required placeholder="Delivery price for the car"  name='price_delivery'>
+                                                    </div>
+
+
+                                                    <div style="text-align: left" class="mb-3">
+                                                        <label class="form-label">Car insurance price</label>
+                                                        <input class="form-control" type="number" placeholder="Car insurance price"  name='price_insurance'>
+                                                    </div>
+
+                                                    <div style="text-align: left" class="mb-3">
+                                                        <label class="form-label">stock</label>
+                                                        <input class="form-control" type="number"required  placeholder="stock"  name='stock'>
                                                     </div>
 
                                                     <div style="text-align: left" class="mb-3">
@@ -120,7 +136,7 @@
 
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Car Model</label>
-                                                        <select class="form-control" name='model_id'>
+                                                        <select class="form-control" name='model_id' required>
                                                           @foreach ($models as $model )
                                                                <option value ={{$model->id}}>{{$model->name}}</option>
                                                           @endforeach
@@ -128,7 +144,7 @@
                                                     </div>
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Car Brand</label>
-                                                        <select class="form-control" name='brand_id'>
+                                                        <select class="form-control" name='brand_id' required>
                                                               @foreach ($brands as $brand )
                                                                <option value ={{$brand->id}}>{{$brand->name}}</option>
                                                           @endforeach
@@ -136,7 +152,7 @@
                                                     </div>
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Car Category</label>
-                                                        <select class="form-control" name='cat_id'>
+                                                        <select class="form-control" name='cat_id' required>
                                                              @foreach ($cats as $cat )
                                                                <option value ={{$cat->id}}>{{$cat->name}}</option>
                                                           @endforeach
@@ -177,7 +193,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                       
+
                                     <?php $i = 0 ; ?>
 
                                         @foreach ($cars as $car )
@@ -186,7 +202,7 @@
                                            <td>{{ $i }}</td>
 
                                         <td>{{$car->name}}</td>
-                                        
+
                                        <td>{{$car->cat->name}}</td>
                                           <td>{{$car->brand->name}}</td>
 
@@ -234,6 +250,21 @@
                                                         <input class="form-control" type="number" placeholder="Car Price per day"  name='price' value="{{ $car->price }}">
                                                     </div>
 
+                                                    <div style="text-align: left" class="mb-3">
+                                                        <label class="form-label">Delivery price for the car</label>
+                                                        <input class="form-control" type="number" required placeholder="Delivery price for the car"  value="{{ $car->price_delivery }}"  name='price_delivery'>
+                                                    </div>
+
+
+                                                    <div style="text-align: left" class="mb-3">
+                                                        <label class="form-label">Car insurance price</label>
+                                                        <input class="form-control" type="number" placeholder="Car insurance price"  value="{{ $car->price_insurance }}" name='price_insurance'>
+                                                    </div>
+
+                                                    <div style="text-align: left" class="mb-3">
+                                                        <label class="form-label">stock</label>
+                                                        <input class="form-control" type="number"required  placeholder="stock"  value="{{ $car->stock }}"  name='stock'>
+                                                    </div>
                                                     <div style="text-align: left" class="mb-3">
                                                         <label class="form-label">Car Description ar</label>
                                                         <input class="form-control" placeholder="Car Description" name='desc_ar'  value="{{ $car->getTranslation('desc', 'ar') }}">
@@ -328,5 +359,5 @@
     </div>
 </div>
 <!-- Container-fluid Ends-->
- 
+
 @endsection
