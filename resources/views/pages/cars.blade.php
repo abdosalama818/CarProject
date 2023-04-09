@@ -175,6 +175,7 @@
 
 
                                             <a href="{{route('car.details',$car->id)}}" class="offer-btn-2">Details</a>
+                                            <a href="{{route('addToWhichList.store',$car->id)}}" class="offer-btn-2">Add To Which List</a>
                                         </div>
                                     </div>
                                 </div>

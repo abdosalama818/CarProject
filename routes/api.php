@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\APiMainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\PasswordResetRequestController;
 use App\Http\Controllers\Api\OrderApiController;
 
 /*
@@ -32,6 +33,9 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+
+    Route::post('sendPasswordResetLink', [PasswordResetRequestController::class,'sendEmail']);
+    Route::post('resetPassword', 'App\Http\Controllers\ChangePasswordController@passwordResetProcess');
 
 
 });

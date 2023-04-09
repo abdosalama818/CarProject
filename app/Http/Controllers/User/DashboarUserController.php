@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Car;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Order;
+use App\Models\Contact;
+use App\Models\Whichlist;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Controller;
-use App\Models\Contact;
 use App\Models\Personalinformation;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -212,6 +214,30 @@ class DashboarUserController extends Controller
         }
 
 
+    }
+
+
+
+    public function whichlist()
+    {
+
+
+
+        try {
+
+     $items=  Whichlist::all();
+
+     foreach($items as $item){
+        $cars = Car::where('id',$item->car_id)->get();
+     }
+
+
+         return view('user.whichlist')->with(compact('items','cars'));
+        } catch (\Exception $e) {
+
+
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
     }
 
 

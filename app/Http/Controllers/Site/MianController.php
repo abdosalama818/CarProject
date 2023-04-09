@@ -21,6 +21,8 @@ use App\Models\Discountmodel;
 use Illuminate\Bus\Queueable;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
+use App\Models\Whichlist;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\CssSelector\Node\ElementNode;
 
@@ -219,4 +221,33 @@ class MianController extends Controller
     {
         return view('pages.about');
     }
+
+
+
+    public function addToWhichList(Request $request,$id)
+    {
+
+
+        try {
+
+            $car= Car::where('id',$id)->first();
+
+            Whichlist::create([
+                'car_id' => $id,
+
+                'user_id' => Auth::id(),
+
+            ]);
+
+            return back();
+        } catch (\Exception $e) {
+
+
+            return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+   
+
+
 }

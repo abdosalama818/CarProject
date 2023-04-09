@@ -88,10 +88,10 @@ Route::group(
            Route::get('cardetails/{id}',[RequesrtedCarController::class,'carDetails'])->name('cardetails.show')->middleware(['auth','IsAdmin']);
            Route::get('cancelrquest/{id}',[RequesrtedCarController::class,'cancelRequest'])->name('cancelrquest')->middleware(['auth','IsAdmin']);
            Route::get('oldrquest',[RequesrtedCarController::class,'oldRequested'])->name('oldrquest')->middleware(['auth','IsAdmin']);
-        
+
            ///end reqeusted car
 
-         // admin crud controler 
+         // admin crud controler
          Route::resource('Admins',AdminCrudController::class)->middleware(['auth','IsAdmin']);
          Route::get('admin_delete/{id}',[AdminCrudController::class,'delete'])->name('Admin.delete')->middleware(['auth','IsAdmin']);
 
@@ -99,12 +99,12 @@ Route::group(
          //admin crud end
 
 
-          // admin Adminsetting controler 
+          // admin Adminsetting controler
           Route::resource('Adminsetting',AdminSettingController::class)->middleware(['auth','IsAdmin']);
           Route::get('contact/request',[ContatcRequest::class,'contact'])->name('contact.request')->middleware(['auth','IsAdmin']);
          // Route::get('admin_delete/{id}',[AdminCrudController::class,'delete'])->name('Admin.delete');
- 
- 
+
+
           //admin Adminsetting end
 
       //admin route end
@@ -119,7 +119,7 @@ Route::group(
       Route::get('/fleats/brand/{id}',[MianController::class,'fleats_brand'])->name('fleats.brand');
       Route::get('/fleats/cat/{id}',[MianController::class,'fleats_cat'])->name('fleats.cat');
       Route::get('/fleats/model/{id}',[MianController::class,'fleats_model'])->name('fleats.model');
-      
+
       Route::get('/car/search',[MianController::class,'findCar'])->name('car.search');
       Route::get('/resevecar/{id}',[MianController::class,'reserve'])->name('car.reserve')->middleware(['auth','IsUser']);;
       Route::get('/car/details/{id}',[MianController::class,'car_datails'])->name('car.details');
@@ -128,29 +128,33 @@ Route::group(
       Route::get('/about',[MianController::class,'about'])->name('about');
       Route::get('/contact',[MianController::class,'contact'])->name('contact');
       Route::post('/contact/store',[MianController::class,'contactStore'])->name('contact.store');
-      
-     //user 
+      Route::get('/addToWhichList/{id}',[MianController::class,'addToWhichList'])
+      ->name('addToWhichList.store')->middleware(['auth']);
+
+
+
+     //user
       Route::get('/dashbord/user',[DashboarUserController::class,'index'])->name('dashbord.user')->middleware(['auth','IsUser']);
       Route::get('/dashbord/user/request_car',[DashboarUserController::class,'request_car'])->name('dashbord.request_car')->middleware(['auth','IsUser']);
-      
+
       Route::get('user/oldrquest',[DashboarUserController::class,'oldRequested'])->name('user.oldrquest')->middleware(['auth','IsUser']);
       Route::get('user/setting',[DashboarUserController::class,'userSetting'])->name('user.setting')->middleware(['auth','IsUser']);
       Route::post('user/setting/update',[DashboarUserController::class,'userSettingUpdate'])->name('usersetting.update')->middleware(['auth','IsUser']);
       Route::post('user/generalinfo/update',[DashboarUserController::class,'userGeneralInformationUpdate'])->name('usersettingGeneralInfo.update')->middleware(['auth','IsUser']);
+      Route::get('/user/whichlist',[DashboarUserController::class,'whichlist'])->name('whichlist.show')->middleware(['auth','IsUser']);
 
-      
-    
+
       //Route::get('/store/reserve/{id}',[MianController::class,'storeReserveCar'])->name('car.reserve_store');
-      
-    
 
-     
+
+
+
     });
 
 
 
     /* ////////////////////////MAin site Route  */
 
-    
+
 
 
