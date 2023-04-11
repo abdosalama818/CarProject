@@ -43,6 +43,25 @@ class DashboarUserController extends Controller
 
     }
 
+    public function read_notification($id){
+
+        $user = User::where('id',Auth::id())->where('type','client')->first();
+
+        $orders = Order::where('user_id',$user->id)->get();
+        $order_id = Order::findOrFail($id);
+       $notification_id =  DB::table('notifications')->where('data->order_id',$id)->pluck('id');
+       DB::table('notifications')->where('id',$notification_id)->update([
+        'read_at'=>now(),
+       ]);
+
+        return view('user.requested-cars')->with(compact('orders'));
+
+
+    }
+
+
+
+
     public function cancelrquest_user($id){
         $order = $this->getDataById(new Order(),$id);
         $order->delete();

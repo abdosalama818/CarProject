@@ -12,18 +12,24 @@ use Faker\Core\Number;
 use App\Models\Contact;
 use App\Models\Discount;
 use App\Models\ModelCar;
+use App\Models\Whichlist;
 use App\Trait\QueryTrait;
+use App\Mail\OrderShipped;
 use App\Models\Bigdiscount;
 use App\Models\Discountcat;
 use Illuminate\Http\Request;
 use App\Models\Discountbrand;
 use App\Models\Discountmodel;
 use Illuminate\Bus\Queueable;
+use App\Events\SendEmailEvents;
 use PhpParser\Node\Stmt\Return_;
 use App\Http\Controllers\Controller;
-use App\Models\Whichlist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use App\Notifications\OrderNotification;
+use League\CommonMark\Node\Query\OrExpr;
+use Illuminate\Support\Facades\Notification;
 use Symfony\Component\CssSelector\Node\ElementNode;
 
 class MianController extends Controller
@@ -33,8 +39,8 @@ class MianController extends Controller
     public function index()
     {
 
-
         //return Session::get('variableName');
+        Notification::send(Auth::user(), new OrderNotification(Auth::user()->orders));
 
 
         $cats = $this->getAllData(new Cat());
@@ -247,7 +253,7 @@ class MianController extends Controller
         }
     }
 
-   
+
 
 
 }

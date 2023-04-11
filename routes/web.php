@@ -136,6 +136,7 @@ Route::group(
      //user
       Route::get('/dashbord/user',[DashboarUserController::class,'index'])->name('dashbord.user')->middleware(['auth','IsUser']);
       Route::get('/dashbord/user/request_car',[DashboarUserController::class,'request_car'])->name('dashbord.request_car')->middleware(['auth','IsUser']);
+      Route::get('/dashbord/user/request_car/{id}',[DashboarUserController::class,'read_notification'])->name('dashbord.request_car_id')->middleware(['auth','IsUser']);//for notification
 
       Route::get('user/oldrquest',[DashboarUserController::class,'oldRequested'])->name('user.oldrquest')->middleware(['auth','IsUser']);
       Route::get('user/setting',[DashboarUserController::class,'userSetting'])->name('user.setting')->middleware(['auth','IsUser']);

@@ -14,6 +14,7 @@
     @yield('css')
         @include('pagesLayout.header')
 </head>
+
 <body>
 <!-- Header Top Area Start -->
 <section style="direction: ltr" class="elgazal-header-top-area">
@@ -25,6 +26,7 @@
                 </div>
             </div>
             <div class="col-md-6">
+
 
                 <div class="header-top-right">
 @guest
@@ -41,6 +43,7 @@
  @endguest
 
  @auth
+
  <a href="{{route('dashbord.user')}}">
     <i class="fa fa-key"></i>
     Dashbord
@@ -64,7 +67,7 @@
                         @if (App::getLocale() == 'ar')
                         <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
                                 data-toggle="dropdown" aria-haspopup="true">
-                            {{ LaravelLocalization::getCurrentLocaleName() }} 
+                            {{ LaravelLocalization::getCurrentLocaleName() }}
                         </button>
                         @else
                         <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang"
@@ -80,7 +83,7 @@
                                     </a>
                                 </li>
                             @endforeach
-                            
+
                         </ul>
                     </div>
                 </div>

@@ -43,24 +43,13 @@ class OrderNotification extends Notification
     public function toArray($notifiable)
     {
 
-
+          
         return [
             'order_id'=>$this->order->id,
-            'user_id'=>Auth::id(),
+            'order'=>$this->order,
+
+            'user_id'=>$this->order->user_id,
         ];
     }
 }
-/*
-   $table->text('name')->nullable();
-            $table->text('price')->nullable();//description
-            $table->text('total_price')->nullable();//description
-            $table->text('number_days')->nullable();//description
-            $table->text('start_date')->nullable();
-            $table->text('exp_date')->nullable();
-            $table->text('qty')->default(1)->nullable();
-            $table->enum('status' , ['paid' , 'unpaid' ])->default('unpaid')->nullable();
 
-
-            $table->foreignId('user_id')-
-
-*/

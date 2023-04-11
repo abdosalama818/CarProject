@@ -23,9 +23,11 @@ return new class extends Migration
             $table->text('exp_date')->nullable();
             $table->text('qty')->default(1)->nullable();
             $table->enum('status' , ['paid' , 'unpaid' ])->default('unpaid')->nullable();
+            $table->enum('flag' , ['send' , 'unsend' ])->default('unsend')->nullable();
 
 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
+
 
           $table->softDeletes();
             $table->timestamps();

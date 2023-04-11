@@ -29,6 +29,6 @@ class SendEmaiListener
     public function handle(SendEmailEvents $event)
     {
       Mail::to($event->user->email)->send(new OrderShipped());
-        
+
     }
 }

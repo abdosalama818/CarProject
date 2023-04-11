@@ -68,6 +68,7 @@ return [
     | ahead and set this to a sensible default for you out of the box.
     |
     */
+//APP_TIMEZONE='Africa/Cairo'
 
     'timezone' => 'Africa/Cairo',
     //'Africa/Cairo'
