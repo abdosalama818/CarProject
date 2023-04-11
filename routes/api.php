@@ -1,11 +1,12 @@
 <?php
 
-use App\Http\Controllers\Api\APiMainController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Auth\PasswordResetRequestController;
+use App\Http\Controllers\Api\APiMainController;
 use App\Http\Controllers\Api\OrderApiController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Auth\ChangePasswordController;
+use App\Http\Controllers\Api\Auth\PasswordResetRequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,11 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
-
     Route::post('sendPasswordResetLink', [PasswordResetRequestController::class,'sendEmail']);
-    Route::post('resetPassword', 'App\Http\Controllers\ChangePasswordController@passwordResetProcess');
+
+    Route::post('resetPassword', [ChangePasswordController::class,'passwordResetProcess'])->name('resetPassword');
+
+
 
 
 });

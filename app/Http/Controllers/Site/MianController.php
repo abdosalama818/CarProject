@@ -39,8 +39,7 @@ class MianController extends Controller
     public function index()
     {
 
-        //return Session::get('variableName');
-        Notification::send(Auth::user(), new OrderNotification(Auth::user()->orders));
+        
 
 
         $cats = $this->getAllData(new Cat());
