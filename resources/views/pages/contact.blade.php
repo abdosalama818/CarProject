@@ -7,12 +7,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcromb-box">
-                    <h3>Contact Us</h3>
+                    <h3>{{ __("trans.Contact us") }}</h3>
                     <ul>
                         <li><i class="fa fa-home"></i></li>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url('/') }}">{{ __("trans.Home") }}</a></li>
                         <li><i class="fa fa-angle-right"></i></li>
-                        <li>Contact Us</li>
+                        <li>{{ __("trans.Contact us") }}</li>
                     </ul>
                 </div>
             </div>
@@ -38,7 +38,7 @@
         <div class="row">
             <div class="col-lg-7">
                 <div class="contact-left text-right-rtl">
-                    <h3>Get in touch</h3>
+                    <h3>{{ __("trans.Get In Touch") }}</h3>
                 <form style="border:none" class="card" action='{{ route("contact.store") }}' method="post" autocomplete="off">
                                          @csrf
                         <div class="row">
@@ -76,7 +76,7 @@
                             <div class="col-md-12">
                                 <div class="single-contact-field">
                                     <button type="submit" class="elgazal-theme-btn"><i class="fa fa-paper-plane"></i> Send
-                                        Message
+                                        {{ __("trans.Write Here Your Message") }}
                                     </button>
                                 </div>
                             </div>
@@ -86,19 +86,19 @@
             </div>
             <div class="col-lg-5">
                 <div class="contact-right text-right-rtl">
-                    <h3>Contact information</h3>
+                    <h3>{{ __("trans.Contact Information") }} </h3>
                     <div class="contact-details">
                         <p><i class="fa fa-map-marker"></i> 125 Big fella St. Road, New York, Hi 5654775 </p>
                         <div class="single-contact-btn">
-                            <h4>Email Us</h4>
+                            <h4>{{ __("trans.Email Us") }} </h4>
                             <a href="#">info@example.com</a>
                         </div>
                         <div class="single-contact-btn">
-                            <h4>Call Us</h4>
+                            <h4>{{ __("trans.Call Us") }}</h4>
                             <a href="#">+(09)-2134-76894-9</a>
                         </div>
                         <div class="social-links-contact">
-                            <h4>Follow Us:</h4>
+                            <h4>{{ __("trans.Follow Us:") }} </h4>
                             <ul>
                                 <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>

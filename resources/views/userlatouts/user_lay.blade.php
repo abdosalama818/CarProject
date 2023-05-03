@@ -1,5 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<
+
+
+@if (App::getLocale() == 'ar')
+<html lang="ar" dir="rtl">
+@else
+<html lang="en"dir="ltr">
+@endif
+
+
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -251,7 +260,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span>Dashboard</span></a>
+                                    <span>{{ __("trans.Dashbord") }}</span></a>
                             </li>
                             <li class="sidebar-list">
                                 <a class="sidebar-link sidebar-title link-nav" href="{{route('dashbord.request_car')}}">
@@ -270,7 +279,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span>Requested Cars</span></a>
+                                    <span>{{ __("trans.Requested Cars") }} </span></a>
                             </li>
 
 
@@ -291,7 +300,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span>whichlist Cars</span></a>
+                                    <span>{{ __("trans.whichlist Cars") }} </span></a>
                             </li>
                             <li class="sidebar-list">
                                 <a class="sidebar-link sidebar-title link-nav" href="{{route('user.oldrquest')}}">
@@ -310,7 +319,7 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span>History</span></a>
+                                    <span>{{ __("trans.History") }}</span></a>
                             </li>
 
 
@@ -337,13 +346,13 @@
                                             </g>
                                         </g>
                                     </svg>
-                                    <span>Settings</span></a>
+                                    <span>{{ __("trans.Settings") }}</span></a>
                             </li>
                         </ul>
                         <div class="sidebar-img-section">
                             <div class="sidebar-img-content">
                                 <img class="img-fluid" src="{{asset("assets/images/side-bar.png")}}" alt="">
-                                <h4>Need Help ?</h4>
+                                <h4>{{ __("trans.Need Any Help?") }}</h4>
                                 <a class="txt" href="mailto:info@elghazal.com">Raise ticket at "info@elghazal.com"</a>
                                 <a class="btn btn-secondary" href="#">Good Luck</a>
                             </div>

@@ -31,42 +31,42 @@
             <div class="col-lg-4">
                 <div class="car-list-left">
                     <div class="sidebar-widget">
-                       <form action="{{ route('car.search') }}" method="get">
-                                    @csrf
-                            <p>
-                                <input type="text" placeholder="Car Name" name='name'/>
-                            </p>
-                            <p>
-                                <select name='cat'>
-                                                    <option>Car Category</option>
-                                                   
-                                                    @foreach ($cats as $cat )
-                                                          <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                                    @endforeach
-                                                </select>
-                            </p>
-                            <p>
-                             <select name='model'>
-                                                    <option>Car Model</option>
-                                                    
-                                                   @foreach ($models as $model )
-                                                          <option value="{{$model->id}}">{{$model->name}}</option>
-                                                    @endforeach
-                                                </select>
-                            </p>
-                            <p>
-                                  <select>
-                                                    <option name='brand'>Car Brand</option>
-                                                    
-                                                   @foreach ($brands as $brand )
-                                                          <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                                    @endforeach
-                                                </select>
-                            </p>
-                            <p>
-                                <button type="submit" class="elgazal-theme-btn">Find Car</button>
-                            </p>
-                        </form>
+                        <form action="{{ route('car.search') }}" method="get">
+                            @csrf
+                    <p>
+                        <input type="text" placeholder="Car Name" name='name'/>
+                    </p>
+                    <p>
+                        <select name='cat'>
+                                            <option>{{ __('trans.Category car') }}</option>
+
+                                            @foreach ($cats as $cat )
+                                                  <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                            @endforeach
+                                        </select>
+                    </p>
+                    <p>
+                     <select name='model'>
+                                            <option>{{ __('trans.model car ') }}</option>
+
+                                           @foreach ($models as $model )
+                                                  <option value="{{$model->id}}">{{$model->name}}</option>
+                                            @endforeach
+                                        </select>
+                    </p>
+                    <p>
+                          <select>
+                                            <option name='brand'>{{ __('trans.Car Brand') }}</option>
+
+                                           @foreach ($brands as $brand )
+                                                  <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                            @endforeach
+                                        </select>
+                    </p>
+                    <p>
+                        <button type="submit" class="elgazal-theme-btn">{{ __('trans.car name') }}</button>
+                    </p>
+                </form>
                     </div>
                     <div class="sidebar-widget">
 
@@ -74,34 +74,34 @@
                                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Brands<span>({{$brands->count()}})</span></a>
+                                <a href="#">{{ __("trans.All Brands") }}  <span>({{$brands->count()}})</span></a>
                             </li>
 
                             @foreach ($brands as $brand )
                                   <li>
                                 <a href="{{route('fleats.brand',$brand->id)}}">{{$brand->name}}<span>
-                          
+
                                    ({{$brand->cars->count()}})
-                                   
-                              
-                                
+
+
+
                                 </span></a>
                             </li>
                             @endforeach
-                          
-                      
+
+
                         </ul>
                     </div>
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Categories<span>({{$cats->count()}})</span></a>
+                                <a href="#">{{ __("trans.All Categories") }}  <span>({{$cats->count()}})</span></a>
                             </li>
                             @foreach ($cats as $cat )
                                   <li>
                                 <a href="{{route('fleats.cat',$cat->id)}}">{{$cat->name}}<span>
                                  ({{$cat->cars->count()}})
-                                
+
                                 </span></a>
                             </li>
                             @endforeach
@@ -110,13 +110,13 @@
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Models<span>({{$models->count()}})</span></a>
+                                <a href="#">{{ __("trans.All Models") }}  <span>({{$models->count()}})</span></a>
                             </li>
                                 @foreach ($models as $model )
                                   <li>
                                 <a href="{{route('fleats.model',$model->id)}}">{{$model->name}}<span>
                                ({{$model->cars->count()}})
-                                
+
                                 </span></a>
                             </li>
                             @endforeach
@@ -157,23 +157,23 @@
                                         </a>
                                         <h4>${{$car->price}} <span> Day </span></h4>
                                         <ul>
-                                            <li><i class="fa fa-car"></i>Model:{{$car->modelcar->name}}</li>
+                                            <li><i class="fa fa-car"></i>{{ __("trans.Model:") }}:{{$car->modelcar->name}}</li>
                                             <li><i class="fa fa-cogs"></i>Automatic</li>
                                             <li><i class="fa fa-dashboard"></i>20kmpl</li>
                                         </ul>
                                         <div class="offer-action">
-                                            <a href="{{route('car.reserve',$car->id)}}" class="offer-btn-1">Rent Car</a>
-                                            <a href="{{route('car.details',$car->id)}}" class="offer-btn-2">Details</a>
+                                            <a href="{{route('car.reserve',$car->id)}}" class="offer-btn-1">{{ __("trans.RENT CAR") }} </a>
+                                            <a href="{{route('car.details',$car->id)}}" class="offer-btn-2">{{ __("trans.DETAILS") }}</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         @endforeach   {{-- foreach loop end --}}
-                          
+
                         </div>
-                  
+
                     </div>
-                           {{ $cars->links() }} 
+                           {{ $cars->links() }}
                 {{--     <div class="pagination-box-row">
                         <p>Page 1 of 6</p>
                         <ul class="pagination">

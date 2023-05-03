@@ -6,12 +6,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcromb-box">
-                    <h3>Car Booking</h3>
+                    <h3>{{ __("trans.CAR BOOKING") }}</h3>
                     <ul>
                         <li><i class="fa fa-home"></i></li>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url('/') }}">{{ __("trnas.Home") }}</a></li>
                         <li><i class="fa fa-angle-right"></i></li>
-                        <li>car Details</li>
+                        <li>{{ __("trans.car Details") }}</li>
                     </ul>
                 </div>
             </div>
@@ -133,17 +133,17 @@
                     <p>{{$car->desc}}</p>
                     <div class="car-features clearfix">
                         <ul style="width:50% !important">
-                            <li><i class="fa fa-car"></i> Model: {{$car->modelcar->name}}</li>
-                            <li><i class="fa fa-cogs"></i>Type: {{$car->type}}</li>
-                            <li><i class="fa fa-dashboard"></i>Seats Number: {{$car->seats}}</li>
+                            <li><i class="fa fa-car"></i> {{ __("trans.Model:") }}: {{$car->modelcar->name}}</li>
+                            <li><i class="fa fa-cogs"></i>{{ __("trans.type") }}: {{$car->type}}</li>
+                            <li><i class="fa fa-dashboard"></i>{{ __("trans.Seats Number: ") }}: {{$car->seats}}</li>
                         </ul>
                         <ul style="width:50% !important">
-                            <li><i class="fa fa-car"></i> Category: {{$car->cat->name}}</li>
-                            <li><i class="fa fa-cogs"></i> Color: {{$car->color}}</li>
-                            <li><i class="fa fa-cogs"></i> Pice Per Day: {{$car->price}}</li>
-                            <li><i class="fa fa-cogs"></i> price Delivery: {{$car->price_delivery}}</li>
-                            <li><i class="fa fa-cogs"></i> price Insurance: {{$car->price_insurance}}</li>
-                            <li><i class="fa fa-cogs"></i> price total: {{$car->total_price}}</li>
+                            <li><i class="fa fa-car"></i> {{ __("trans.Category") }}: {{$car->cat->name}}</li>
+                            <li><i class="fa fa-cogs"></i> {{ __("trans.Color") }}: {{$car->color}}</li>
+                            <li><i class="fa fa-cogs"></i>{{  __("trans.Pice Per Day") }} : {{$car->price}}</li>
+                            <li><i class="fa fa-cogs"></i>{{  __("trans.price Delivery") }}: {{$car->price_delivery}}</li>
+                            <li><i class="fa fa-cogs"></i>{{  __("trans.price Insurance") }}: {{$car->price_insurance}}</li>
+                            <li><i class="fa fa-cogs"></i> {{  __("trans.price total") }}: {{$car->total_price}}</li>
 
 
                         </ul>

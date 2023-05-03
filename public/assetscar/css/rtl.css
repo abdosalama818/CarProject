@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+.rtl body{
+    font-family: 'Cairo', sans-serif;
+    font-weight: bold;
+}
+.rtl .main-rtl{
+    direction: rtl;
+}
+.rtl .elgazal-main-header-area{
+    direction: rtl;
+}
+.rtl .header-top-right>a{
+    margin-left: 10px;
+}
+.rtl .text-right-rtl{
+    text-align: right;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.rtl .mar-rtl{
+    margin-top: 27px !important;
+}
+.rtl .elgazal-mainmenu-area{
+    direction: rtl;
+}
+.rtl .mainmenu ul {
+    text-align: right;
+}
+.rtl h1,h2,h3,h4,h5,h6,a{
+    font-family: 'Cairo', sans-serif !important;
+    font-weight: bold !important;
+}
+.rtl .find-box {
+    background: #fff url(../img/find-box-bg.png) no-repeat scroll right;
+}
+.rtl .form-rtl{
+    direction: rtl !important;
+}
+.rtl .about-list ul li i{
+    margin-left: 7px;
+}
+.rtl .footer-address>h3:after{
+    right: 0 !important;
+}
+.rtl .single-footer>h3:after{
+    right: 0 !important;
+}
+.rtl .footer-post-image {
+    float: right;
+}
+@media(max-width: 1000px){
+    .rtl .site-logo a img{
+        margin-top: -10px !important;
+        margin-bottom: -60px !important;
+    }
+    .rtl .find-box{
+        background-image: none;
+    }
+}

@@ -11,9 +11,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="slider-text text-right-rtl">
-                                    <p>for rent $65 per day</p>
-                                    <h2>Reserved Now & Get <span>50% Off</span></h2>
-                                    <a href="#" class="elgazal-btn">Reserve Now!</a>
+                                    <p>{{ __('trans.for rent $65 per day') }}</p>
+                                    <h2>{{ __('trans.RESERVE NOW') }} <span>{{ __('trans.50% Off') }}</span></h2>
+                                    <a href="#" class="elgazal-btn">{{ __('trans.RESERVE NOW!') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -28,9 +28,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="slider-text text-right-rtl">
-                                    <p>for rent $70 per day</p>
-                                    <h2>Reserved Now & Get <span>50% Off</span></h2>
-                                    <a href="#" class="elgazal-btn">Reserve Now!</a>
+                                    <p>{{ __('trans.for rent $65 per day') }}</p>
+                                    <h2>{{ __('trans.RESERVE NOW') }} <span>{{ __('trans.50% Off') }}</span></h2>
+                                    <a href="#" class="elgazal-btn">{{ __('trans.RESERVE NOW!') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -109,13 +109,13 @@
                         </div>
                         <div class="col-md-4">
                             <div class="find-text">
-                                <h3>Search Your Best Cars here.</h3>
+                                <h3>{{ __('trans.Search Your Best Cars here') }}</h3>
                             </div>
                         </div>
                         @else
                             <div class="col-md-4">
                             <div class="find-text">
-                                <h3>Search Your Best Cars here.</h3>
+                                <h3>{{ __('trans.Search Your Best Cars here') }}</h3>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -157,7 +157,7 @@
                                         <div class="col-md-4">
                                             <p>
                                                 <select>
-                                                    <option name='brand'>Car Brand</option>
+                                                    <option name='brand'>{{ __('trans.Car Brand') }} </option>
 
                                                    @foreach ($brands as $brand )
                                                           <option value="{{$brand->id}}">{{$brand->name}}</option>
@@ -167,7 +167,7 @@
                                         </div>
                                         <div class="col-md-4">
                                             <p>
-                                                <button type="submit" class="elgazal-theme-btn">Find Car</button>
+                                                <button type="submit" class="elgazal-theme-btn">{{ __('trans.FIND CAR') }}</button>
                                             </p>
                                         </div>
                                     </div>
@@ -190,16 +190,16 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="about-left">
-                    <h4>about us</h4>
-                    <h2>Welcome to elgazal</h2>
+                    <h4>{{ __('trans.ABOUT US') }} </h4>
+                    <h2>{{ __('trans.Welcome To Elgazal') }}</h2>
                     <p>Horem Ipsum passages, and more recently with desktop publishing software like aldus pageMaker
                         including versions of all the Rorem Ipsum generators</p>
                     <div class="about-list">
                         <ul>
-                            <li><i class="fa fa-check"></i>We are a trusted name</li>
-                            <li><i class="fa fa-check"></i>we deal in have all brands</li>
-                            <li><i class="fa fa-check"></i>have a larger stock of vehicles</li>
-                            <li><i class="fa fa-check"></i>we are at worldwide locations</li>
+                            <li><i class="fa fa-check"></i>{{ __('trans.We are a trusted name') }}</li>
+                            <li><i class="fa fa-check"></i>{{ __("trans.we deal in have all brands") }}</li>
+                            <li><i class="fa fa-check"></i>{{ __('trans.have a larger stock of vehicles') }}</li>
+                            <li><i class="fa fa-check"></i>{{ __('trans.we are at worldwide locations') }}</li>
                         </ul>
                     </div>
                     <div class="about-signature">
@@ -235,8 +235,8 @@
             </div>
             <div class="col-md-6">
                 <div class="promo-box-right">
-                    <h3>Do You Want To Reserve a Car? So Don't be Late.</h3>
-                    <a href="#" class="elgazal-btn">Reserve Now</a>
+                    <h3>{{ __("trans.Do You Want To Reserve A Car? So Don't Be Late.") }}</h3>
+                    <a href="#" class="elgazal-btn">{{ __('trans.Reserve Now') }}</a>
                 </div>
             </div>
         </div>
@@ -251,8 +251,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="site-heading">
-                    <h4>Come with</h4>
-                    <h2>Hot offers</h2>
+                    <h4>{{ __('trans.Come With') }}</h4>
+                    <h2>{{ __('trans.Offers') }}</h2>
                 </div>
             </div>
         </div>
@@ -263,7 +263,7 @@
                     <ul class="nav nav-tabs" id="offerTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="all-tab" data-toggle="tab" href="#all" role="tab"
-                               aria-controls="all" aria-selected="true">All Brands</a>
+                               aria-controls="all" aria-selected="true">{{ __('trans.All Brands') }}</a>
                         </li>
                         @foreach ($brands as $brand )
                                   <li class="nav-item">
@@ -598,8 +598,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="site-heading">
-                    <h4>Some words</h4>
-                    <h2>testimonial</h2>
+                    <h4>{{ __('trans.Some Words') }}</h4>
+                    <h2>{{ __('trans.testimonial') }}</h2>
                 </div>
             </div>
         </div>
@@ -684,7 +684,7 @@
             <div class="col-md-12">
                 <div class="call-box">
                     <div class="call-box-inner">
-                        <h2>With Over <span>150+</span> Partners Locations</h2>
+                        <h2>{{ __('trans.With Over') }} <span>150+</span> {{ __('trans.Partners Locations') }}</h2>
                         <p>Labore dolore magna aliqua ipsum veniam quis nostrud exercitation voluptate velit cillum
                             dolore feu fugiat nulla excepteur sint occaecat sed ipsum cupidatat proident culpa
                             exercitation ullamco laboris aliquik.</p>
@@ -693,7 +693,7 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="call-text">
-                                <p>need any help?</p>
+                                <p>{{ __('trans.Need Any Help?') }}</p>
                                 <h4><a href="#">(431) 529 2093</a></h4>
                             </div>
                         </div>

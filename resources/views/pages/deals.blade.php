@@ -13,12 +13,12 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcromb-box">
-                    <h3>Our Deals</h3>
+                    <h3>{{ __("trans.Our Deals") }}</h3>
                     <ul>
                         <li><i class="fa fa-home"></i></li>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url('/') }}">{{ __("trans.Home") }}</a></li>
                         <li><i class="fa fa-angle-right"></i></li>
-                        <li>Our Deals</li>
+                        <li>{{ __("trans.Our Deals") }}</li>
                     </ul>
                 </div>
             </div>
@@ -35,42 +35,42 @@
             <div class="col-lg-4">
                 <div class="car-list-left">
                     <div class="sidebar-widget">
-                         <form action="{{ route('car.search') }}" method="get">
-                                    @csrf
-                            <p>
-                                <input type="text" placeholder="Car Name" name='name'/>
-                            </p>
-                            <p>
-                                <select name='cat'>
-                                                    <option>Car Category</option>
+                        <form action="{{ route('car.search') }}" method="get">
+                            @csrf
+                    <p>
+                        <input type="text" placeholder="{{ __('trans.car Name') }}" name='name'/>
+                    </p>
+                    <p>
+                        <select name='cat'>
+                                            <option>{{ __("trans.category car") }}</option>
 
-                                                    @foreach ($cats as $cat )
-                                                          <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                                    @endforeach
-                                                </select>
-                            </p>
-                            <p>
-                             <select name='model'>
-                                                    <option>Car Model</option>
+                                            @foreach ($cats as $cat )
+                                                  <option value="{{$cat->id}}">{{$cat->name}}</option>
+                                            @endforeach
+                                        </select>
+                    </p>
+                    <p>
+                     <select name='model'>
+                                            <option>{{ __('trans.model car ') }}</option>
 
-                                                   @foreach ($models as $model )
-                                                          <option value="{{$model->id}}">{{$model->name}}</option>
-                                                    @endforeach
-                                                </select>
-                            </p>
-                            <p>
-                                  <select>
-                                                    <option name='brand'>Car Brand</option>
+                                           @foreach ($models as $model )
+                                                  <option value="{{$model->id}}">{{$model->name}}</option>
+                                            @endforeach
+                                        </select>
+                    </p>
+                    <p>
+                          <select>
+                                            <option name='brand'>{{ __('trans.Car Brand') }}</option>
 
-                                                   @foreach ($brands as $brand )
-                                                          <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                                    @endforeach
-                                                </select>
-                            </p>
-                            <p>
-                                <button type="submit" class="elgazal-theme-btn">Find Car</button>
-                            </p>
-                        </form>
+                                           @foreach ($brands as $brand )
+                                                  <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                            @endforeach
+                                        </select>
+                    </p>
+                    <p>
+                        <button type="submit" class="elgazal-theme-btn">{{ __('trans.car name') }}</button>
+                    </p>
+                </form>
                     </div>
                     <div class="sidebar-widget">
 
@@ -78,7 +78,7 @@
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Brands<span>({{$brands->count()}})</span></a>
+                                <a href="#">{{ __("trans.All Brands") }}<span>({{$brands->count()}})</span></a>
                             </li>
 
                             @foreach ($brands as $brand )
@@ -99,7 +99,7 @@
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Categories<span>({{$cats->count()}})</span></a>
+                                <a href="#">{{ __("trans.All Categories") }} <span>({{$cats->count()}})</span></a>
                             </li>
                             @foreach ($cats as $cat )
                                   <li>
@@ -114,7 +114,7 @@
                     <div class="sidebar-widget display">
                         <ul class="service-menu">
                             <li class="active">
-                                <a href="#">All Models<span>({{$models->count()}})</span></a>
+                                <a href="#">{{ __("trans.All Models") }} <span>({{$models->count()}})</span></a>
                             </li>
                                 @foreach ($models as $model )
                                   <li>
@@ -170,10 +170,10 @@
                                      ${{$car->total_price - $car->discount->discount_value}}
 
                                     @endif
-                                    <h6>Car Price Per Day :$ {{$car->price}}</h6>
+                                    <h6>{{ __("trans.Pice Per Day") }} :$ {{$car->price}}</h6>
 
-                                    <h6>Car Price Delivry :$ {{$car->price_delivery}}</h6>
-                                    <h6>Car Price Insurance :$ {{$car->price_insurance}}</h6>
+                                    <h6>{{ __("trans.price Delivery") }} :$ {{$car->price_delivery}}</h6>
+                                    <h6>{{ __("trans.price Insurance") }} :$ {{$car->price_insurance}}</h6>
 
 
                                     <ul>
@@ -187,9 +187,9 @@
                                         <a href=""  style="pointer-events: none" class="offer-btn-1">No Car </a>
 
                                        @else
-                                       <a href="{{route('car.reserve',$car->id)}}" class="offer-btn-1">Rent Car</a>
+                                       <a href="{{route('car.reserve',$car->id)}}" class="offer-btn-1">{{ __("trans.RENT CAR") }}</a>
                                        @endif
-                                        <a href="{{route('car.details',$car->id)}}" class="offer-btn-2">Details</a>
+                                        <a href="{{route('car.details',$car->id)}}" class="offer-btn-2">{{ __("trans.DETAILS") }}</a>
                                     </div>
 
                                    {{--

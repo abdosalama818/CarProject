@@ -86,19 +86,19 @@
 
  @extends('pagesLayout.layout')
 @section('content')
-    
+
 <!-- Breadcromb Area Start -->
 <section class="elgazal-breadcromb-area section_70">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcromb-box">
-                    <h3>Register Page</h3>
+                    <h3>{{ __("trans.REGISTER PAGE") }}</h3>
                     <ul>
                         <li><i class="fa fa-home"></i></li>
-                        <li><a href="index.html">Home</a></li>
+                        <li><a href="{{ url("/") }}">{{ __("trans.Home") }}</a></li>
                         <li><i class="fa fa-angle-right"></i></li>
-                        <li>Register</li>
+                        <li>{{ __("trans.REGISTER NOW") }}</li>
                     </ul>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                 <div class="login-box">
                     <div class="login-page-heading">
                         <i class="fa fa-key"></i>
-                        <h3>sign Up</h3>
+                        <h3>{{ __("trans.Sign Up") }}</h3>
                     </div>
 
 
@@ -130,7 +130,7 @@
                 </div>
             @endif
 
-            
+
                  <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="account-form-group">
@@ -156,15 +156,15 @@
                         <div class="remember-row">
                             <p class="checkbox remember signup">
                                 <input class="checkbox-spin" type="checkbox" id="Freelance">
-                                <label for="Freelance"><span></span>accept terms & condition</label>
+                                <label for="Freelance"><span></span>{{ __("trans.Accept Terms & Condition") }}</label>
                             </p>
                         </div>
                         <p>
-                            <button type="submit" class="elgazal-theme-btn">Register now</button>
+                            <button type="submit" class="elgazal-theme-btn">{{ __("trans.REGISTER NOW") }}</button>
                         </p>
                     </form>
                     <div class="login-sign-up">
-                        <a href="login.html">Already have an account?</a>
+                        <a href="{{ url("login") }}">{{ __("trans.Already Have An Account?") }}</a>
                     </div>
                 </div>
             </div>

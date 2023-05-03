@@ -1,13 +1,13 @@
 @extends('pagesLayout.layout')
 @section('content')
-    
+
 <!-- Breadcromb Area Start -->
 <section class="elgazal-breadcromb-area section_70">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcromb-box">
-                    <h3>Register Page</h3>
+                    <h3>Register </h3>
                     <ul>
                         <li><i class="fa fa-home"></i></li>
                         <li><a href="index.html">Home</a></li>
@@ -44,7 +44,7 @@
                 </div>
             @endif
 
-            
+
                  <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="account-form-group">

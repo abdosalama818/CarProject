@@ -6,13 +6,13 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-sm-6">
-                            <h3>Dashboard</h3>
+                            <h3>{{ __("trans.Dashbord") }}</h3>
                         </div>
                         <div class="col-12 col-sm-6">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class="home-item" href="index.html"><i
+                                <li class="breadcrumb-item"><a class="home-item" href="{{ url('/dashbord/user') }}"><i
                                         data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item"> Dashboard</li>
+                                <li class="breadcrumb-item"> {{ __("trans.Dashbord") }}</li>
                             </ol>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                    
+
                                         <th scope="col">Link</th>
 
 

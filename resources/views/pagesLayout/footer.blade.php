@@ -14,12 +14,12 @@
                         <p>sed do eiusmod tempor incididunt ut labore et dolore magna as aliqua. Ut enim ad minim
                             veniam, quis nostrud exercitation ullamco.</p>
                         <div class="footer-address">
-                            <h3>Head office</h3>
-                            <p>King Khalid Airport Terminal 2 - Riyadh</p>
+                            <h3>{{ trans('trans.Head office') }}</h3>
+                            <p>{{ trans('trans.King Khalid Airport Terminal 2 - Riyadh') }}</p>
                             <ul>
-                                <li>Phone: 123456789</li>
-                                <li>Email: example@mail.com</li>
-                                <li>Office Time: 9AM- 4PM</li>
+                                <li>{{ trans('trans.Phone: 123456789') }} </li>
+                                <li>{{ trans('trans.Email: example@mail.com') }} </li>
+                                <li>{{ trans('trans.Office Time: 9AM- 4PM') }}</li>
                             </ul>
                         </div>
                     </div>
@@ -28,19 +28,19 @@
                     <div class="single-footer quick_links text-right-rtl">
                         <h3>Quick Links</h3>
                         <ul class="quick-links">
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Our Cars</a></li>
-                            <li><a href="#">Our Deals</a></li>
-                            <li><a href="#">Contact us</a></li>
+                            <li><a href="{{ url('about') }}">{{ trans('trans.ABOUT US') }}</a></li>
+                            <li><a href="{{ url('fleats') }}">{{ trans('trans.Our Cars') }}</a></li>
+                            <li><a href="{{ url('deals') }}">{{ trans('trans.Our Deals') }}</a></li>
+                            <li><a href="{{ url('contact') }}">{{ trans('trans.Contact us') }}</a></li>
                         </ul>
                         <ul class="quick-links">
-                            <li><a href="#">Register</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms and Condition</a></li>
+                            <li><a href="{{ url('login') }}">{{ trans('trans.Register') }}</a></li>
+                            <li><a href="#">{{ trans('trans.Privacy Policy') }}</a></li>
+                            <li><a href="#">{{ trans('trans.Terms and Condition') }}</a></li>
                         </ul>
                     </div>
                     <div class="single-footer newsletter_box text-right-rtl">
-                        <h3>newsletter</h3>
+                        <h3>{{ trans('trans.NEWSLETTER') }}</h3>
                         <form style="direction: ltr">
                             <input type="email" placeholder="Email Address"/>
                             <button type="submit"><i class="fa fa-paper-plane"></i></button>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="single-footer text-right-rtl">
-                        <h3>Recent Cars</h3>
+                        <h3>{{ trans('trans.RECENT CARS') }}</h3>
                         <ul>
                             <li>
                                 <div class="single-footer-post">
@@ -130,7 +130,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="copyright">
-                        <p>&copy; CopyRight 2023 ElGhazal Company </p>
+                        <p>&copy; {{ trans('trans.© CopyRight 2023 ElGhazal Company') }} </p>
                     </div>
                 </div>
                 <div class="col-md-6">

@@ -2,7 +2,7 @@
 @if (App::getLocale() == 'ar')
 <html lang="en-US" class="rtl">
 @else
-<html lang="en-US">
+<html lang="ar" class="ltr">
 @endif
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,12 +33,12 @@
 
                     <a href="{{route('login')}}">
                         <i class="fa fa-key"></i>
-                        login
+                        {{ __('trans.Login') }}
                     </a>
 
                     <a href="{{route('register')}}">
                         <i class="fa fa-user"></i>
-                        register
+                          {{ __('trans.Register') }}
                     </a>
  @endguest
 
@@ -46,13 +46,13 @@
 
  <a href="{{route('dashbord.user')}}">
     <i class="fa fa-key"></i>
-    Dashbord
+    {{ __('trans.Dashbord') }}
 </a>
 
 
 
 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-    Logout
+     {{ __('trans.Logout') }}
 </a>
 
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -112,8 +112,8 @@
                             <img src="{{asset('assetscar/img/globe.png')}}" alt="globe"/>
                         </div>
                         <div class="header-promo-info">
-                            <h3>Saudi Arabia</h3>
-                            <p>King Khalid Airport Terminal 2 - Riyadh</p>
+                            <h3>{{ __('trans.Saudi Arabia') }}</h3>
+                            <p>{{ __('trans.King Khalid Airport Terminal 2 - Riyadh') }}</p>
                         </div>
                     </div>
                     <div class="single-header-promo">
@@ -121,7 +121,7 @@
                             <img src="{{asset('assetscar/img/clock.png')}}" alt="clock"/>
                         </div>
                         <div class="header-promo-info">
-                            <h3>Saturday to Thursday</h3>
+                            <h3>{{ __('trans.Saturday to Thursday') }}</h3>
                             <p>9:00am - 6:00pm</p>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
             </div>
             <div class="col-lg-3">
                 <div class="header-action">
-                    <a href="contact.html"><i class="fa fa-phone"></i> Request a call</a>
+                    <a href="contact.html"><i class="fa fa-phone"></i> {{ trans('trans.REQUEST A CALL') }} </a>
                 </div>
             </div>
         </div>

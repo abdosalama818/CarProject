@@ -1,22 +1,22 @@
 
-    
+
     @extends('userlatouts.user_lay')
 @section('content_body')
-    
+
     <div class="page-body-wrapper">
-      
+
         <div class="page-body">
             <div class="container-fluid">
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-sm-6">
-                            <h3>Dashboard</h3>
+                            <h3>{{ __("trans.Dashbord") }}</h3>
                         </div>
                         <div class="col-12 col-sm-6">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class="home-item" href="index.html"><i
+                                <li class="breadcrumb-item"><a class="home-item" href="{{ url('/dashbord/user') }}"><i
                                         data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item"> Dashboard</li>
+                                <li class="breadcrumb-item"> {{ __("trans.Dashbord") }}</li>
                             </ol>
                         </div>
                     </div>
@@ -35,17 +35,17 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Car Name</th>
-                                        <th scope="col">Link</th>
-                                        <th scope="col">Start Date and Time</th>
-                                        <th scope="col">End Date and Time</th>
-                                        <th scope="col">State</th>
-                                     
-                                        <th scope="col">Action</th>
+                                        <th scope="col">{{ __("trans.car Name") }}</th>
+                                        <th scope="col">{{ __("trans.Link") }}</th>
+                                        <th scope="col">{{ __("trans.Start date and time") }}</th>
+                                        <th scope="col">{{ __("trans.End date and time") }}</th>
+                                        <th scope="col">{{ __("trans.State") }}</th>
+
+                                        <th scope="col">{{ __("trans.Action") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                     <?php $i = 0 ; ?>
 
                                         @foreach ($orders as $order )
@@ -65,8 +65,8 @@
 
                                         @endif
                                         <td style="color: red">{{$order->status}}</td>
-                                      
-                                       
+
+
 
                                       @foreach ($order->cars as $car )
                                                <td>
@@ -123,7 +123,7 @@
 
                                     </tr>
                                     @endforeach
-                              
+
                                     </tbody>
                                 </table>
                             </div>

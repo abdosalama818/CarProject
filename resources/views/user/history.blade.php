@@ -6,13 +6,13 @@
                 <div class="page-title">
                     <div class="row">
                         <div class="col-12 col-sm-6">
-                            <h3>Dashboard</h3>
+                            <h3>{{ __("trans.Dashbord") }}</h3>
                         </div>
                         <div class="col-12 col-sm-6">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a class="home-item" href="index.html"><i
+                                <li class="breadcrumb-item"><a class="home-item" href="{{ url('/dashbord/user') }}"><i
                                         data-feather="home"></i></a></li>
-                                <li class="breadcrumb-item"> Dashboard</li>
+                                <li class="breadcrumb-item"> {{ __("trans.Dashbord") }}</li>
                             </ol>
                         </div>
                     </div>
@@ -24,24 +24,24 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Reservation History</h5>
+                                <h5>{{ __("trans.Reservation History") }}</h5>
                             </div>
                             <div class="table-responsive">
                                   <table class="table">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Car Name</th>
-                                        <th scope="col">Link</th>
-                                        <th scope="col">Start Date and Time</th>
-                                        <th scope="col">End Date and Time</th>
-                                      
-                                     
-                                        <th scope="col">Action</th>
+                                        <th scope="col">{{ __("trans.car Name") }}</th>
+                                        <th scope="col">{{ __("trans.Link") }}</th>
+                                        <th scope="col">{{ __("trans.Start date and time") }}</th>
+                                        <th scope="col">{{ __("trans.End date and time") }}</th>
+
+
+                                        <th scope="col">{{ __("trans.Action") }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        
+
                                     <?php $i = 0 ; ?>
 
                                         @foreach ($orders as $order )
@@ -51,14 +51,14 @@
                                         <td>{{$order->name}}</td>
                                       @foreach ($order->cars as $car )
                                             <td>
-                                            <a href="{{route("car.details",$car->id)}}" class="btn btn-secondary">Link</a>
+                                            <a href="{{route("car.details",$car->id)}}" class="btn btn-secondary">{{ __("trans.Link") }}</a>
                                         </td>
                                       @endforeach
                                         <td>{{$order->start_date}}</td>
                                         <td>{{$order->exp_date}}</td>
-                                       
-                                      
-                                       
+
+
+
 
                                       @foreach ($order->cars as $car )
                                                <td>
@@ -81,23 +81,23 @@
                                                                     </thead>
                                                                     <tbody>
                                                                         <tr>
-                                                                            <th>Car Name</th>
+                                                                            <th>{{ __("trans.car Name") }}</th>
                                                                             <td>{{$car->name}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Car Model</th>
+                                                                            <th>{{ __("trans.model car ") }}</th>
                                                                             <td>{{$car->modelcar->name}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Car Category</th>
+                                                                            <th> {{ __("trans.category car") }}</th>
                                                                             <td>{{$car->cat->name}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Car Price</th>
+                                                                            <th>{{ __("trans.price") }}</th>
                                                                             <td>{{$order->price}}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <th>Request state</th>
+                                                                            <th>{{ __("trans.State") }}</th>
                                                                             <td>{{$order->id}}</td>
                                                                         </tr>
                                                                     </tbody>
@@ -106,7 +106,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                             
+
                                             </div>
                                         </td>
                                       @endforeach
@@ -115,7 +115,7 @@
 
                                     </tr>
                                     @endforeach
-                              
+
                                     </tbody>
                                 </table>
                             </div>

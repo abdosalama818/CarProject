@@ -9,7 +9,7 @@
                         </div>
                         <div class="col-12 col-sm-6">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="index.html"> <i data-feather="home"></i></a></li>
+                                <li class="breadcrumb-item"><a href="{{ url('/dashbord/user') }}"> <i data-feather="home"></i></a></li>
                                 <li class="breadcrumb-item">Username</li>
                             </ol>
                         </div>
@@ -33,7 +33,7 @@
                                 <div class="card-body">
                                         <form action='{{ route("usersetting.update", $user->id) }}' method="post" autocomplete="off" enctype="multipart/form-data">
                                          @csrf
-                                    
+
                                         <div class="row mb-2">
                                             <div class="profile-title">
                                                 <div class="media"><img class="img-70 rounded-circle" alt=""

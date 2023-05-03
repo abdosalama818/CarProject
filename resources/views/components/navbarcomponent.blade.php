@@ -5,11 +5,11 @@
                 <div class="mainmenu">
                     <nav>
                         <ul id="elgazal_navigation">
-                            <li class="active"><a href="{{route('home')}}">home</a></li>
-                            <li><a href="{{route('about')}}">about</a></li>
-                            <li><a href="{{route('fleats')}}">Our Fleet</a></li>
-                            <li><a href="{{route('deals')}}">Deals</a></li>
-                            <li><a href="{{route('contact')}}">contact</a></li>
+                            <li class="active"><a href="{{route('home')}}">{{ __('trans.Home') }}</a></li>
+                            <li><a href="{{route('about')}}">{{ __('trans.ABOUT US') }}</a></li>
+                            <li><a href="{{route('fleats')}}">{{ __('trans.OUR FLEET') }}</a></li>
+                            <li><a href="{{route('deals')}}">{{ __('trans.Our Deals') }}</a></li>
+                            <li><a href="{{route('contact')}}">{{ __('trans.CONTACT US') }}</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -23,7 +23,7 @@
                     <div style="direction: ltr !important;" class="search-box">
                           <form action="{{ route('car.search') }}" method="get">
                                     @csrf
-                            <input type="search" placeholder="Search" name='name'>
+                            <input type="search" placeholder="{{ __('trans.search') }}" name='name'>
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
