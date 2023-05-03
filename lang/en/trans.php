@@ -149,4 +149,13 @@ return [
     "price total"=>" price total",
 
 
+        //user dashboard
+
+        "hello"=>"hello ",
+        "price"=>"price",
+        "Requested Cars"=>"Requested Cars ",
+        "whichlist Cars"=>"whichlist Cars",
+        "History"=>"History",
+        "Settings"=>"Settings",
+
 ];
